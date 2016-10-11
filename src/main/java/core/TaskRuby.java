@@ -29,7 +29,8 @@ public class TaskRuby extends Application {
         Persistence p = new Persistence("test.db");
         try {
             p.saveTask(new Task("buy robert a present"));
-            p.saveTask(new Task("another random task"));
+            Task test = p.saveTask(new Task("another random task"));
+            System.out.println(test.taskIdentifier().get());
             testTasks = FXCollections.observableArrayList(p.getTasks());
         } catch (SQLException e) {
             // TODO Auto-generated catch block

@@ -13,7 +13,8 @@ public class Persistence {
     
     private void initializeDB() throws SQLException {
         Statement stmt = connection.createStatement();
-        String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, task_name VARCHAR(255))";
+        String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')))";
         stmt.execute(query);
         //query = "insert into tasks(task_name) values(\"buy milk\")";
         //stmt.execute(query);
@@ -48,6 +49,16 @@ public class Persistence {
         return tasks;
     }
     
+    private int getLatestId() throws SQLException {
+        Statement stmt = connection.createStatement();
+        String query = "select * from tasks order by datetime(created_at) desc limit 1";
+        ResultSet r = stmt.executeQuery(query);
+        while (r.next()) {
+            return r.getInt(COL_PRIMARY_KEY);
+        }
+        return -1;
+    }
+    
     public Task getTask(int id) {
         /*
          * by primary key 
@@ -65,11 +76,14 @@ public class Persistence {
         return new Task(1, "ask");
     }
     
-    public int saveTask(Task t) throws SQLException {
+    public Task saveTask(Task t) throws SQLException {
         String query = "INSERT INTO tasks(task_name) VALUES(?)";
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, t.taskShortName().get());
-        return stmt.executeUpdate();
+        
+        stmt.executeUpdate();
+        t.setTaskIdentifier(getLatestId());
+        return t;
     }
     
     int saveTasks(ArrayList<Task> tasks) {

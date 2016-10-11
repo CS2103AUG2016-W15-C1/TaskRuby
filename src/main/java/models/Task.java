@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Task {
-    private final IntegerProperty taskIdentifier;
+    private IntegerProperty taskIdentifier;
     private final StringProperty taskShortName;
     
     public Task(String taskName) {
@@ -37,5 +37,9 @@ public class Task {
     
     public String getTaskShortName() {
         return taskShortName.get();
+    }
+    
+    public void setTaskIdentifier(int id) {
+        this.taskIdentifier = new SimpleIntegerProperty(id);
     }
 }

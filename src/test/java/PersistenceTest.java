@@ -42,9 +42,12 @@ public class PersistenceTest {
     @Test
     public void addTask() {
         try {
-            int updateResult = persistence.saveTask(new Task("buy robert"));
-            assertEquals(1, updateResult);
-        } catch(SQLException e) {
+            Task updateResult = persistence.saveTask(new Task("buy robert"));
+            assertEquals("add 1 task", 1, updateResult.taskIdentifier().get());
+            Thread.sleep(1000);
+            updateResult = persistence.saveTask(new Task("buy robert 2"));
+            assertEquals("add one more task", 2, updateResult.taskIdentifier().get());
+        } catch(SQLException | InterruptedException e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
@@ -56,7 +59,6 @@ public class PersistenceTest {
             ArrayList<Task> tasks = persistence.getTasks();
             assertEquals("that there are no tasks at first", 0, tasks.size());
             persistence.saveTask(new Task("test task"));
-            assertEquals("that 1 task was added", 1, persistence.getTasks().size());
             String addedTaskName = persistence.getTasks().get(0).taskShortName().get();
             assertEquals("that the task added is the same", "test task", addedTaskName);
         } catch(SQLException e) {
