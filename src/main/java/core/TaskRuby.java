@@ -25,6 +25,7 @@ public class TaskRuby extends Application {
                     new Task("test task 1"),
                     new Task("test task 2")
                 );
+        Persistence p = new Persistence();
     }
     
     private Stage primaryStage;
