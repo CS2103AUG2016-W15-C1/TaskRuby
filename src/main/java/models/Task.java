@@ -9,7 +9,7 @@ public class Task {
     private final IntegerProperty taskIdentifier;
     private final StringProperty taskShortName;
     
-    public Task(String taskName) {
+    public Task(int taskId, String taskName) {
         /*
          * TODO
          * taskIdentifier is the primary identifier for each task and as such
@@ -18,7 +18,7 @@ public class Task {
          * has not been created yet
          * 
          */
-        this.taskIdentifier = new SimpleIntegerProperty((int) Math.random() * 100);
+        this.taskIdentifier = new SimpleIntegerProperty(taskId);
         this.taskShortName = new SimpleStringProperty(taskName);
     }
     

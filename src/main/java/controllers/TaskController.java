@@ -31,7 +31,8 @@ public class TaskController {
                             protected void updateItem(Task t, boolean b) {
                                 super.updateItem(t, b);
                                 if (t != null) {
-                                    setText(t.taskShortName().get());
+                                    setText(t.taskIdentifier().get() +
+                                            ": " + t.taskShortName().get());
                                 }
                             }
                         };

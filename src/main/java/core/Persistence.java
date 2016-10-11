@@ -41,10 +41,15 @@ public class Persistence {
         while (r.next()) {
             //System.err.println(r.getInt(COL_PRIMARY_KEY));
             //System.err.println(r.getString(COL_TASK_NAME));
-            tasks.add(new Task(r.getString(COL_TASK_NAME)));
+            tasks.add(new Task(r.getInt(COL_PRIMARY_KEY),
+                               r.getString(COL_TASK_NAME)));
         }
         
         return tasks;
+    }
+    
+    boolean save() {
+        return false;
     }
     
     public Connection getConnection() {
