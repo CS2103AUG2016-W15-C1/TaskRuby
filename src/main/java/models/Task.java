@@ -9,6 +9,11 @@ public class Task {
     private final IntegerProperty taskIdentifier;
     private final StringProperty taskShortName;
     
+    public Task(String taskName) {
+        this.taskShortName = new SimpleStringProperty(taskName);
+        this.taskIdentifier = new SimpleIntegerProperty(0);
+    }
+    
     public Task(int taskId, String taskName) {
         /*
          * TODO

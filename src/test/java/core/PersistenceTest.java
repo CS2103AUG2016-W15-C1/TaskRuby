@@ -6,10 +6,13 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import models.Task;
 
 public class PersistenceTest {
     
@@ -40,9 +43,24 @@ public class PersistenceTest {
     @Test
     public void addTask() {
         try {
-            persistence.getTasks();//TODO STUB ONLY
+            int updateResult = persistence.saveTask(new Task("buy robert"));
+            assertEquals(1, updateResult);
         } catch(SQLException e) {
             e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
+    
+    @Test
+    public void getTasks() {
+        try {
+            ArrayList<Task> tasks = persistence.getTasks();
+            assertEquals("that there are no tasks at first", 0, tasks.size());
+            persistence.saveTask(new Task("test task"));
+            assertEquals("that 1 task was added", 1, persistence.getTasks().size());
+            String addedTaskName = persistence.getTasks().get(0).taskShortName().get();
+            assertEquals("that the task added is the same", "test task", addedTaskName);
+        } catch(SQLException e) {
             fail(e.getMessage());
         }
     }

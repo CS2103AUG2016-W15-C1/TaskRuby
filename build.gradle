@@ -30,11 +30,6 @@ repositories {
     mavenCentral()
 }
 
-//jar {
-//  manifest {
-//    attributes 'Main-Class': 'core.TaskRuby'
-//  }
-//}
 
 // In this section you declare the dependencies for your production and test code
 dependencies {

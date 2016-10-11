@@ -48,9 +48,32 @@ public class Persistence {
         return tasks;
     }
     
-    boolean save() {
-        //TODO
-        return false;
+    public Task getTask(int id) {
+        /*
+         * by primary key 
+         * TODO
+         */
+        return new Task(1, "asd");
+    }
+    
+    public Task getTask(String task) {
+        /*
+         * get closes match to the task
+         * SQL LIKE
+         * TODO
+         */
+        return new Task(1, "ask");
+    }
+    
+    int saveTask(Task t) throws SQLException {
+        String query = "INSERT INTO tasks(task_name) VALUES(?)";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setString(1, t.taskShortName().get());
+        return stmt.executeUpdate();
+    }
+    
+    int saveTasks(ArrayList<Task> tasks) {
+        return 0;
     }
     
     public Connection getConnection() {
