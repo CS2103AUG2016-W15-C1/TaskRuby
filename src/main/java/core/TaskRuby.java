@@ -1,6 +1,7 @@
 package core;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import controllers.TaskController;
 import javafx.application.Application;
@@ -21,11 +22,17 @@ public class TaskRuby extends Application {
          * TODO
          * test item list
          */
-        testTasks = FXCollections.observableArrayList(
-                    new Task("test task 1"),
-                    new Task("test task 2")
-                );
+        //testTasks = FXCollections.observableArrayList(
+        //            new Task("test task 1"),
+        //            new Task("test task 2")
+        //        );
         Persistence p = new Persistence();
+        try {
+            testTasks = FXCollections.observableArrayList(p.getTasks());
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     private Stage primaryStage;
