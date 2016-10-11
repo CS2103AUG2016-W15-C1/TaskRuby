@@ -65,7 +65,7 @@ public class Persistence {
         return new Task(1, "ask");
     }
     
-    int saveTask(Task t) throws SQLException {
+    public int saveTask(Task t) throws SQLException {
         String query = "INSERT INTO tasks(task_name) VALUES(?)";
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, t.taskShortName().get());
