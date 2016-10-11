@@ -26,7 +26,7 @@ public class TaskRuby extends Application {
         //            new Task("test task 1"),
         //            new Task("test task 2")
         //        );
-        Persistence p = new Persistence();
+        Persistence p = new Persistence("test.db");
         try {
             testTasks = FXCollections.observableArrayList(p.getTasks());
         } catch (SQLException e) {

@@ -20,10 +20,10 @@ public class Persistence {
         stmt.close();
     }
     
-    public Persistence() {
+    public Persistence(String dbName) {
         try {
             Class.forName("org.sqlite.JDBC");
-            setConnection(DriverManager.getConnection("jdbc:sqlite:test.db"));
+            setConnection(DriverManager.getConnection("jdbc:sqlite:" + dbName));
             initializeDB();
         } catch(Exception e) {
             e.printStackTrace();
@@ -49,6 +49,7 @@ public class Persistence {
     }
     
     boolean save() {
+        //TODO
         return false;
     }
     
