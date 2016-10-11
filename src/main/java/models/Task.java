@@ -29,4 +29,8 @@ public class Task {
     public StringProperty taskShortName() {
         return taskShortName;
     }
+    
+    public String getTaskShortName() {
+        return taskShortName.get();
+    }
 }

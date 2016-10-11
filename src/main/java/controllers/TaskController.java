@@ -4,12 +4,15 @@ import core.TaskRuby;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import models.Task;
 
 public class TaskController {
     @FXML
     private ListView<Task> taskListView;
+    @FXML
+    private TextField commandField;
     
     private TaskRuby main;
     
@@ -28,7 +31,7 @@ public class TaskController {
                             protected void updateItem(Task t, boolean b) {
                                 super.updateItem(t, b);
                                 if (t != null) {
-                                    setText(t.taskShortName().toString());
+                                    setText(t.taskShortName().get());
                                 }
                             }
                         };
@@ -36,6 +39,9 @@ public class TaskController {
                     }
                 }
             );
+        
+        commandField.setOnAction(event ->
+                System.out.println("event trigger for command"));
     }
     
     public TaskController() {}
