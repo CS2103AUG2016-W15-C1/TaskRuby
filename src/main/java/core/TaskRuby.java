@@ -25,7 +25,7 @@ public class TaskRuby extends Application {
         //            new Task("test task 1"),
         //            new Task("test task 2")
         //        );
-        Persistence p = new Persistence("test.db");
+        p = new Persistence("test.db");
         try {
             p.saveTask(new Task("buy robert a present"));
             Task test = p.saveTask(new Task("another random task"));
@@ -39,7 +39,12 @@ public class TaskRuby extends Application {
     
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private Persistence p;
     private ObservableList<Task> testTasks;
+    
+    public Persistence getStorageLayer() {
+        return p;
+    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
