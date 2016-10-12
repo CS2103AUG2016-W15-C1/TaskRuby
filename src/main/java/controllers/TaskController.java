@@ -1,5 +1,6 @@
 package controllers;
 
+import core.InputParser;
 import core.TaskRuby;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -15,6 +16,7 @@ public class TaskController {
     private TextField commandField;
     
     private TaskRuby main;
+    private InputParser commandParser;
     
     @FXML
     private void initialize() {
@@ -32,6 +34,8 @@ public class TaskController {
                                 super.updateItem(t, b);
                                 if (t != null) {
                                     setText(t.taskShortName().get());
+                                } else {
+                                    setText("");
                                 }
                             }
                         };
@@ -41,10 +45,13 @@ public class TaskController {
             );
         
         commandField.setOnAction(event ->
-                System.out.println("event trigger for command"));
+                commandParser.stubParser(main.getTasks(),
+                                         commandField.getText()));
     }
     
-    public TaskController() {}
+    public TaskController() {
+        commandParser = new InputParser();
+    }
     
     public void setMain(TaskRuby main) {
         this.main = main;
