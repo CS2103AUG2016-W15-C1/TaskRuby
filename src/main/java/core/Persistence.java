@@ -33,10 +33,14 @@ public class Persistence {
         }
     }
     
-    public ArrayList<Task> getTasks() throws SQLException {
+    private ResultSet runQuery(String query) throws SQLException {
         Statement stmt = connection.createStatement();
+        return stmt.executeQuery(query);
+    }
+    
+    public ArrayList<Task> getTasks() throws SQLException {
         String query = "SELECT * FROM tasks";
-        ResultSet r = stmt.executeQuery(query);
+        ResultSet r = runQuery(query);
         ArrayList<Task> tasks = new ArrayList<Task>();
         
         while (r.next()) {
@@ -50,9 +54,8 @@ public class Persistence {
     }
     
     private int getLatestId() throws SQLException {
-        Statement stmt = connection.createStatement();
         String query = "select * from tasks order by datetime(created_at) desc limit 1";
-        ResultSet r = stmt.executeQuery(query);
+        ResultSet r = runQuery(query);
         while (r.next()) {
             return r.getInt(COL_PRIMARY_KEY);
         }
@@ -83,6 +86,18 @@ public class Persistence {
         
         stmt.executeUpdate();
         t.setTaskIdentifier(getLatestId());
+        return t;
+    }
+    
+    public Task getTaskByName(String taskName) throws SQLException {
+        String query = "select id, task_name from tasks where task_name like ? limit 1";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setString(1, taskName);
+        ResultSet r = stmt.executeQuery();
+        Task t = new Task("test");
+        while (r.next())
+            t = new Task(r.getInt(COL_PRIMARY_KEY),
+                         r.getString(COL_TASK_NAME));
         return t;
     }
     

@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-@SuppressWarnings("unused") //TODO remove
 public class TaskRuby extends Application {
     
     public TaskRuby() {
@@ -30,7 +29,7 @@ public class TaskRuby extends Application {
         try {
             p.saveTask(new Task("buy robert a present"));
             Task test = p.saveTask(new Task("another random task"));
-            System.out.println(test.taskIdentifier().get());
+            System.out.println(p.getTaskByName("present").taskShortName().get());
             testTasks = FXCollections.observableArrayList(p.getTasks());
         } catch (SQLException e) {
             // TODO Auto-generated catch block
