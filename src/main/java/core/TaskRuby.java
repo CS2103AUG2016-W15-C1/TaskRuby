@@ -21,6 +21,7 @@ public class TaskRuby extends Application {
          * TODO
          * test item list
          */
+        isVisible = false;
         testTasks = FXCollections.observableArrayList(
                     new Task("test task 1"),
                     new Task("test task 2")
@@ -30,6 +31,7 @@ public class TaskRuby extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Task> testTasks;
+    public boolean isVisible;
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub

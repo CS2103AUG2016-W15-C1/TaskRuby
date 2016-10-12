@@ -18,6 +18,11 @@ public class TaskController {
     private TaskRuby main;
     private InputParser commandParser;
     
+    private void updateList() {
+        commandParser.stubParser(main.getTasks(), commandField.getText());
+        commandField.setText("");
+    }
+    
     @FXML
     private void initialize() {
         taskListView.setCellFactory(
@@ -33,6 +38,7 @@ public class TaskController {
                             protected void updateItem(Task t, boolean b) {
                                 super.updateItem(t, b);
                                 if (t != null) {
+                                    if (main.isVisible)
                                     setText(t.taskShortName().get());
                                 } else {
                                     setText("");
@@ -44,17 +50,14 @@ public class TaskController {
                 }
             );
         
-        commandField.setOnAction(event ->
-                commandParser.stubParser(main.getTasks(),
-                                         commandField.getText()));
+        commandField.setOnAction(event -> updateList());
     }
     
-    public TaskController() {
-        commandParser = new InputParser();
-    }
+    public TaskController() {}
     
     public void setMain(TaskRuby main) {
         this.main = main;
+        commandParser = new InputParser(this.main);
         taskListView.setItems(main.getTasks());
     }
 }
