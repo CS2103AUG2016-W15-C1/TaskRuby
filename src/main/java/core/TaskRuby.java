@@ -21,6 +21,13 @@ public class TaskRuby extends Application {
          * TODO
          * test item list
          */
+        storage = new DatabaseStorage("");
+        try {
+            System.out.println(storage.getNextAvailableIdentifier());
+        } catch (StorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         testTasks = FXCollections.observableArrayList(
                     new Task("test task 1"),
                     new Task("test task 2")
@@ -30,6 +37,7 @@ public class TaskRuby extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Task> testTasks;
+    private DatabaseStorage storage;
     
 
     public static void main(String[] args) {
