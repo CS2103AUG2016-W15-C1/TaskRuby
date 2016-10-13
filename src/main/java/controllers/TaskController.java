@@ -1,5 +1,4 @@
 package controllers;
-import core.InputParser;
 import core.TaskRuby;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -15,11 +14,9 @@ public class TaskController {
     private TextField commandField;
     
     private TaskRuby main;
-    private InputParser parser;
     
     @FXML
     private void initialize() {
-        parser = new InputParser();
         taskListView.setCellFactory(
                 /*
                  * TODO change to lambda expression
@@ -44,9 +41,7 @@ public class TaskController {
             );
         
         commandField.setOnAction(event ->
-            parser.stubParser(main.getTasks(),
-                              main.getStorageLayer(),
-                              commandField.getText())
+            System.out.print("command")
                 );
     }
     

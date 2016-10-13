@@ -21,30 +21,16 @@ public class TaskRuby extends Application {
          * TODO
          * test item list
          */
-        //testTasks = FXCollections.observableArrayList(
-        //            new Task("test task 1"),
-        //            new Task("test task 2")
-        //        );
-        p = new Persistence("test.db");
-        try {
-            p.saveTask(new Task("buy robert a present"));
-            Task test = p.saveTask(new Task("another random task"));
-            System.out.println(p.getTaskByName("present").taskShortName().get());
-            testTasks = FXCollections.observableArrayList(p.getTasks());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        testTasks = FXCollections.observableArrayList(
+                    new Task("test task 1"),
+                    new Task("test task 2")
+                );
     }
     
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private Persistence p;
     private ObservableList<Task> testTasks;
     
-    public Persistence getStorageLayer() {
-        return p;
-    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
