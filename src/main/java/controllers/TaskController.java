@@ -1,4 +1,6 @@
 package controllers;
+import core.CommandException;
+import core.ParseException;
 import core.TaskRuby;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -14,6 +16,15 @@ public class TaskController {
     private TextField commandField;
     
     private TaskRuby main;
+    
+    private void parseInput(String input) {
+        try {
+            main.getParser().parse(input);
+        } catch (ParseException | CommandException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     
     @FXML
     private void initialize() {
@@ -41,10 +52,10 @@ public class TaskController {
             );
         
         commandField.setOnAction(event ->
-            System.out.print("command")
-                );
+            parseInput(commandField.getText()));
     }
     
+
     public TaskController() {}
     
     public void setMain(TaskRuby main) {

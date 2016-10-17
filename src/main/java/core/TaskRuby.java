@@ -2,6 +2,7 @@ package core;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import controllers.TaskController;
 import javafx.application.Application;
@@ -21,7 +22,13 @@ public class TaskRuby extends Application {
          * TODO
          * test item list
          */
+
+        
         storage = new DatabaseStorage("");
+        parser = new Parser(this);
+        commandList = new HashMap<String, BaseCommand>();
+        
+        commandList.put("add", new AddCommand(storage));
         try {
             System.out.println(storage.getNextAvailableIdentifier());
         } catch (StorageException e) {
@@ -38,7 +45,13 @@ public class TaskRuby extends Application {
     private BorderPane rootLayout;
     private ObservableList<Task> testTasks;
     private DatabaseStorage storage;
+    private Parser parser;
     
+    public Parser getParser() {
+        return parser;
+    }
+    
+    private HashMap<String, BaseCommand> commandList;
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -47,6 +60,10 @@ public class TaskRuby extends Application {
     
     public ObservableList<Task> getTasks() {
         return testTasks;
+    }
+    
+    public HashMap<String, BaseCommand> getAvailableCommands() {
+        return commandList;
     }
 
     @Override
