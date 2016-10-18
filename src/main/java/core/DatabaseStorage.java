@@ -100,6 +100,27 @@ public class DatabaseStorage implements StorageBackend {
         }
         return taskList;
     }
+    
+    public Task getTaskById(int id) throws StorageException {
+        String query = "SELECT * from tasks where id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet r = stmt.executeQuery();
+            
+            if (!r.next()) throw new StorageException("unable to fetch task with that id");
+            else {
+                Task t = new Task(r.getInt(COL_PRIMARY_KEY), r.getString(COL_TASK_NAME));
+                return t;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+        
+    }
 
     @Override
     public int getNextAvailableIdentifier() throws StorageException {

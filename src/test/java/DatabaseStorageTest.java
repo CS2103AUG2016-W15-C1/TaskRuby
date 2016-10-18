@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
@@ -61,6 +62,37 @@ public class DatabaseStorageTest {
             
         } catch (StorageException e) {
             e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
+    
+    @Test
+    public void getTasksTest() {
+        try {
+            assertEquals("that the amount of tasks is 0", 0,
+                         storage.getTasks().size());
+            storage.addTask(new Task("fuck"));
+            assertEquals("amount of tasks increased by 1", 1,
+                         storage.getTasks().size());
+        } catch (StorageException e) {
+            fail(e.getMessage());
+        }
+    }
+    
+    @Test
+    public void getTaskByIdTest() {
+        String[] stubs = new String[10];
+        try {
+            for (int i = 0; i < 10; i++) {
+                stubs[i] = UUID.randomUUID().toString();
+                storage.addTask(new Task(stubs[i]));
+            }
+            
+            for (int i = 0; i < 10; i++) {
+                assertEquals("that each task is the same", stubs[i],
+                             storage.getTaskById(i + 1).getTaskShortName());
+            }
+        } catch (StorageException e) {
             fail(e.getMessage());
         }
     }
