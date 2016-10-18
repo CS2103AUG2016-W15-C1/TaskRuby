@@ -3,6 +3,8 @@ package core;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import controllers.TaskController;
 import javafx.application.Application;
@@ -17,13 +19,15 @@ import javafx.scene.layout.BorderPane;
 
 public class TaskRuby extends Application {
     
+    private static final Logger logger = Logger.getLogger(TaskRuby.class.getName());
+    
     public TaskRuby() {
         /*
          * TODO
          * test item list
          */
 
-        
+        logger.info("main class starting up");
         storage = new DatabaseStorage("");
         parser = new Parser(this);
         commandList = new HashMap<String, BaseCommand>();

@@ -1,4 +1,6 @@
 package controllers;
+import java.util.logging.Logger;
+
 import core.CommandException;
 import core.ParseException;
 import core.TaskRuby;
@@ -10,6 +12,9 @@ import javafx.util.Callback;
 import models.Task;
 
 public class TaskController {
+    
+    private static final Logger logger = Logger.getLogger(TaskController.class.getName());
+    
     @FXML
     private ListView<Task> taskListView;
     @FXML
@@ -18,6 +23,7 @@ public class TaskController {
     private TaskRuby main;
     
     private void parseInput(String input) {
+        logger.info("trying to parse input to textField: " + input);
         try {
             main.getParser().parse(input);
         } catch (ParseException | CommandException e) {
