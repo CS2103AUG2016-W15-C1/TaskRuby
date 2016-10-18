@@ -12,6 +12,11 @@ public class Task {
     public Task(String taskName) {
         this.taskShortName = new SimpleStringProperty(taskName);
         this.taskIdentifier = new SimpleIntegerProperty(0);
+        //to implement start date of task
+        //to implement start time of task 
+        //to implement end date of task
+        //to implement end time of task
+        //to implement completion status of task
     }
     
     public Task(int taskId, String taskName) {
