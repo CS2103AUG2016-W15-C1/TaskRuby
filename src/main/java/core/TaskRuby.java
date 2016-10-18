@@ -55,6 +55,10 @@ public class TaskRuby extends Application {
         return parser;
     }
     
+    public DatabaseStorage getStorage() {
+        return storage;
+    }
+    
     private HashMap<String, BaseCommand> commandList;
 
     public static void main(String[] args) {

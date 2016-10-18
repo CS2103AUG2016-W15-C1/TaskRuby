@@ -3,6 +3,7 @@ import java.util.logging.Logger;
 
 import core.CommandException;
 import core.ParseException;
+import core.StorageException;
 import core.TaskRuby;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -29,6 +30,14 @@ public class TaskController {
         } catch (ParseException | CommandException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+        
+        try {
+            this.main.getTasks().clear();
+            this.main.getTasks().addAll(this.main.getStorage().getTasks());
+        } catch (StorageException e) {
+            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
     }
     

@@ -8,12 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import models.Task;
 /*
  * This class allows tasks to be stored to a sqlite3 db
  */
 public class DatabaseStorage implements StorageBackend {
+    
+    private static final Logger logger = Logger.getLogger(DatabaseStorage.class.getName());
     
     private String fileName = "test.db";
     private Connection conn = null;
@@ -65,6 +69,7 @@ public class DatabaseStorage implements StorageBackend {
     }
     
     public void addTask(Task task) throws StorageException {
+        logger.info("trying to add task to database");
         String query = "INSERT INTO tasks(task_name) VALUES(?)";
         PreparedStatement stmt;
         
@@ -76,13 +81,24 @@ public class DatabaseStorage implements StorageBackend {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.severe(e.getMessage());
             throw new StorageException(e.getMessage());
         }
     }
-
-    @Override
-    public boolean save(Task task) throws StorageException {
-        return false;
+    
+    public ArrayList<Task> getTasks() throws StorageException {
+        String query = "SELECT * FROM tasks";
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try {
+            ResultSet r = runQuery(query);
+            while (r.next()) {
+                taskList.add(new Task(r.getInt(COL_PRIMARY_KEY),
+                                      r.getString(COL_TASK_NAME)));
+            }
+        } catch (SQLException e) {
+            throw new StorageException(e.getMessage());
+        }
+        return taskList;
     }
 
     @Override

@@ -1,6 +1,12 @@
 package core;
 
+import java.util.logging.Logger;
+
+import models.Task;
+
 public class AddCommand extends BaseCommand {
+    
+    private static final Logger logger = Logger.getLogger(AddCommand.class.getName());
     
     private static final String helpString = "add <task>";
 
@@ -21,7 +27,9 @@ public class AddCommand extends BaseCommand {
         }
         //System.out.println(args.length);
         try {
-            System.out.println(this.storage.getNextAvailableIdentifier());
+            Task t = new Task(args[0]);
+            logger.info("trying to add task: " + args[0]);
+            storage.addTask(t);
         } catch (StorageException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
