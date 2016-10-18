@@ -1,5 +1,6 @@
 package core;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import models.Task;
@@ -27,8 +28,9 @@ public class AddCommand extends BaseCommand {
         }
         //System.out.println(args.length);
         try {
-            Task t = new Task(args[0]);
-            logger.info("trying to add task: " + args[0]);
+            String desc = String.join(" ", Arrays.copyOfRange(args, 0, args.length));
+            Task t = new Task(desc);
+            logger.info("trying to add task: " + desc);
             storage.addTask(t);
         } catch (StorageException e) {
             // TODO Auto-generated catch block
