@@ -34,6 +34,7 @@ public class TaskRuby extends Application {
         
         commandList.put("add", new AddCommand(storage));
         commandList.put("delete", new DeleteCommand(storage));
+        commandList.put("list", new ListCommand(storage, this));
         try {
             System.out.println(storage.getNextAvailableIdentifier());
         } catch (StorageException e) {
@@ -51,6 +52,16 @@ public class TaskRuby extends Application {
     private ObservableList<Task> testTasks;
     private DatabaseStorage storage;
     private Parser parser;
+    
+    private boolean isVisible = false;
+    
+    public void setVisible() {
+        this.isVisible = true;
+    }
+    
+    public boolean getTaskListVisibility() {
+        return this.isVisible;
+    }
     
     public Parser getParser() {
         return parser;

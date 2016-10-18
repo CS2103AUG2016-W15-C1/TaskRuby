@@ -56,7 +56,7 @@ public class TaskController {
                             @Override
                             protected void updateItem(Task t, boolean b) {
                                 super.updateItem(t, b);
-                                if (t != null) {
+                                if (t != null && main.getTaskListVisibility()) {
                                     setText(t.taskIdentifier().get() +
                                             ": " + t.taskShortName().get());
                                 } else {
