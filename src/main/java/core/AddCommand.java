@@ -19,7 +19,7 @@ public class AddCommand extends BaseCommand {
         if (args.length == 0) {
             throw new CommandException("empty arguments");
         }
-        System.out.println(args.length);
+        //System.out.println(args.length);
         try {
             System.out.println(this.storage.getNextAvailableIdentifier());
         } catch (StorageException e) {

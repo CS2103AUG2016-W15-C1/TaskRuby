@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,6 +63,22 @@ public class DatabaseStorage implements StorageBackend {
         File file = new File(fileName);
         file.delete();
     }
+    
+    public void addTask(Task task) throws StorageException {
+        String query = "INSERT INTO tasks(task_name) VALUES(?)";
+        PreparedStatement stmt;
+        
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, task.getTaskShortName());
+            if (stmt.executeUpdate() != 1) {
+                throw new StorageException("unable to add task to database");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
 
     @Override
     public boolean save(Task task) throws StorageException {
@@ -75,8 +92,8 @@ public class DatabaseStorage implements StorageBackend {
             ResultSet res = runQuery(query);
             if (!res.next()) return 1;
             else {
-                res.first();
-                return res.getInt(COL_PRIMARY_KEY);
+                //res.first();
+                return res.getInt(COL_PRIMARY_KEY) + 1;
             }
         } catch (SQLException e) {
             throw new StorageException(e.getMessage());
