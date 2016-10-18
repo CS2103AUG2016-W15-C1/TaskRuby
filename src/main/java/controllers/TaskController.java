@@ -24,6 +24,7 @@ public class TaskController {
     private TaskRuby main;
     
     private void parseInput(String input) {
+        commandField.setText("");
         logger.info("trying to parse input to textField: " + input);
         try {
             main.getParser().parse(input);
@@ -58,6 +59,8 @@ public class TaskController {
                                 if (t != null) {
                                     setText(t.taskIdentifier().get() +
                                             ": " + t.taskShortName().get());
+                                } else {
+                                    setText("");
                                 }
                             }
                         };
