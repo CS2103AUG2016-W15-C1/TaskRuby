@@ -25,12 +25,7 @@ public class ClearCommand extends BaseCommand {
         try {
             int index = storage.getNextAvailableIdentifier();
             logger.info("clearing all tasks in list");
-            // iterate and delete
-            for (int i = 1; i < index; i++) {
-               
-                storage.deleteTask(i);
-            }
-
+            storage.deleteAllTasks();
         } catch (StorageException e) {
             e.printStackTrace();
         }

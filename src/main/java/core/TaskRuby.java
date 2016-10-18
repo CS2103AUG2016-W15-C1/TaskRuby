@@ -34,7 +34,9 @@ public class TaskRuby extends Application {
         
         commandList.put("add", new AddCommand(storage));
         commandList.put("delete", new DeleteCommand(storage));
+        commandList.put("clear", new ClearCommand(storage));
         commandList.put("list", new ListCommand(storage, this));
+        
 
         try {
             System.out.println(storage.getNextAvailableIdentifier());
