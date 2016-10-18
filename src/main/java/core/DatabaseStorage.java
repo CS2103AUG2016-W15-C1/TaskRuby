@@ -150,5 +150,16 @@ public class DatabaseStorage implements StorageBackend {
             throw new StorageException(e.getMessage());
         }
     }
+    
+    @Override
+    public void deleteAllTasks() throws StorageException {
+        String query = "DELETE FROM tasks";
+        try {
+            runQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
 
 }
