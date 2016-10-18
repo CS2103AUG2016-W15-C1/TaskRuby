@@ -154,8 +154,12 @@ public class DatabaseStorage implements StorageBackend {
     @Override
     public void deleteAllTasks() throws StorageException {
         String query = "DELETE FROM tasks";
+        String query2 = "delete from sqlite_sequence where name='tasks'";
         try {
-            runQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement(query2);
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new StorageException(e.getMessage());

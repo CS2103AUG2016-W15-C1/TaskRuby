@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,9 +23,7 @@ public class DeleteCommandTest {
         storage = new DatabaseStorage("DeleteCommandTest.db");
         storage.initializeStorage();
         deleteCommand = new DeleteCommand(storage);
-        
-        storage.addTask(new Task("test1"));
-        storage.addTask(new Task("test2"));
+
     }
 
     @After
@@ -32,10 +32,14 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void test() {
+    public void deleteByIdTest() {
         String[] cmd = {"2"};
         String[] cmd2 = {"1"};
-        try {
+        
+        try {    
+            storage.addTask(new Task("test1"));
+            storage.addTask(new Task("test2"));
+            
             assertEquals("that the size is 2 to begin with", 
                     storage.getTasks().size(), 2);
             deleteCommand.execute(cmd);
@@ -48,8 +52,24 @@ public class DeleteCommandTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
             fail(e.getMessage());
-        }
-        
+        }    
     }
+    
+    @Test
+    public void deleteAllTest() {
+        try {
+            for (int i = 0; i < 10; i++) {
+                storage.addTask(new Task(UUID.randomUUID().toString()));
+            }
+            assertEquals("that 10 tasks were added", 10, storage.getTasks().size());
+            storage.deleteAllTasks();
+            assertEquals("that all 10 were deleted", 0, storage.getTasks().size());
+            assertEquals("that the nextId was reset", 1, storage.getNextAvailableIdentifier());
+        } catch (StorageException e) {
+            fail(e.getMessage());
+        }
+    }
+    
+    
 
 }
