@@ -108,5 +108,21 @@ public class DatabaseStorageTest {
             fail(e.getMessage());
         }
     }
+    
+    
+    @Test
+    public void deleteAllTest() {
+        try {
+            for (int i = 0; i < 10; i++) {
+                storage.addTask(new Task(UUID.randomUUID().toString()));
+            }
+            assertEquals("that 10 tasks were added", 10, storage.getTasks().size());
+            storage.deleteAllTasks();
+            assertEquals("that all 10 were deleted", 0, storage.getTasks().size());
+            assertEquals("that the nextId was reset", 1, storage.getNextAvailableIdentifier());
+        } catch (StorageException e) {
+            fail(e.getMessage());
+        }
+    }
 
 }
