@@ -58,8 +58,8 @@ public class TaskRuby extends Application {
     
     private boolean isVisible = false;
     
-    public void setVisible() {
-        this.isVisible = true;
+    public void toggleVisible() {
+        this.isVisible = !this.isVisible;
     }
     
     public boolean getTaskListVisibility() {
