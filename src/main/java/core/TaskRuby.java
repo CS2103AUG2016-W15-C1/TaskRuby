@@ -33,6 +33,7 @@ public class TaskRuby extends Application {
         commandList = new HashMap<String, BaseCommand>();
         
         commandList.put("add", new AddCommand(storage));
+        commandList.put("delete", new DeleteCommand(storage));
         try {
             System.out.println(storage.getNextAvailableIdentifier());
         } catch (StorageException e) {

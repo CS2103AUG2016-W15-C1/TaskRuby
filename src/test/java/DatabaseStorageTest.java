@@ -96,5 +96,17 @@ public class DatabaseStorageTest {
             fail(e.getMessage());
         }
     }
+    
+    @Test
+    public void deleteTaskTest() {
+        try {
+            storage.addTask(new Task("fuck"));
+            assertEquals("size is 1", storage.getTasks().size(), 1);
+            storage.deleteTask(1);
+            assertEquals("size is 0", storage.getTasks().size(), 0);
+        } catch (StorageException e) {
+            fail(e.getMessage());
+        }
+    }
 
 }

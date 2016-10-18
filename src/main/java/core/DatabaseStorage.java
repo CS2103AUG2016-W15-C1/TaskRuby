@@ -136,5 +136,19 @@ public class DatabaseStorage implements StorageBackend {
             throw new StorageException(e.getMessage());
         }
     }
+    
+    @Override
+    public void deleteTask(int id) throws StorageException {
+        String query = "DELETE FROM tasks WHERE id = ?";
+        try {
+            if (id == 0) throw new StorageException("illegal task id");
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
 
 }
