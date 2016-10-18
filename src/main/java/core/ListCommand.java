@@ -12,7 +12,7 @@ public class ListCommand extends BaseCommand {
 
     @Override
     public void execute(String[] args) throws CommandException {
-        this.main.setVisible();
+        this.main.toggleVisible();
     }
 
     @Override
