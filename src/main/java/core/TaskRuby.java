@@ -106,6 +106,8 @@ public class TaskRuby extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            //TaskController controller = loader.getController();
+            //controller.setMain(this);
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -114,12 +116,12 @@ public class TaskRuby extends Application {
     public void initTaskOverviewLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(TaskRuby.class.getResource("/views/TaskOverview.fxml"));
+            loader.setLocation(TaskRuby.class.getResource("/views/TaskRubyIdea.fxml"));
             AnchorPane taskOverview = (AnchorPane) loader.load();
             rootLayout.setCenter(taskOverview);
             
-            TaskController controller = loader.getController();
-            controller.setMain(this);
+            //TaskController controller = loader.getController();
+            //controller.setMain(this);
         } catch(IOException e) {
             e.printStackTrace();
         }
