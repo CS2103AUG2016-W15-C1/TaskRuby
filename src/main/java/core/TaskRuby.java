@@ -89,7 +89,7 @@ public class TaskRuby extends Application {
     public void setTasks(ArrayList<Task> c) {
         testTasks.clear();
         logger.severe("size: " + testTasks.size());
-        //testTasks.addAll(c);
+        testTasks.addAll(c);
     }
     
     public HashMap<String, BaseCommand> getAvailableCommands() {

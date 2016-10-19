@@ -33,13 +33,13 @@ public class TaskController {
             e.printStackTrace();
         }
         
-        try {
+/*        try {
             this.main.getTasks().clear();
             this.main.getTasks().addAll(this.main.getStorage().getTasks());
         } catch (StorageException e) {
             e.printStackTrace();
             logger.severe(e.getMessage());
-        }
+        }*/
     }
     
     @FXML
