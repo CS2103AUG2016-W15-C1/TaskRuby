@@ -23,7 +23,6 @@ public class ClearCommand extends BaseCommand {
             throw new CommandException("clear do not take in args");
         }
         try {
-            int index = storage.getNextAvailableIdentifier();
             logger.info("clearing all tasks in list");
             storage.deleteAllTasks();
         } catch (StorageException e) {

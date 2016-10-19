@@ -2,6 +2,7 @@ package core;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,7 @@ public class TaskRuby extends Application {
         commandList.put("delete", new DeleteCommand(storage));
         commandList.put("clear", new ClearCommand(storage));
         commandList.put("list", new ListCommand(storage, this));
-        
+        commandList.put("find", new FindCommand(storage, this));
 
         try {
             System.out.println(storage.getNextAvailableIdentifier());
@@ -83,6 +84,12 @@ public class TaskRuby extends Application {
     
     public ObservableList<Task> getTasks() {
         return testTasks;
+    }
+    
+    public void setTasks(ArrayList<Task> c) {
+        testTasks.clear();
+        logger.severe("size: " + testTasks.size());
+        //testTasks.addAll(c);
     }
     
     public HashMap<String, BaseCommand> getAvailableCommands() {

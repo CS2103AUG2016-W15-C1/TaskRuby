@@ -165,5 +165,25 @@ public class DatabaseStorage implements StorageBackend {
             throw new StorageException(e.getMessage());
         }
     }
+    
+    @Override
+    public ArrayList<Task> findTaskByName(String name) throws StorageException {
+        String query = "SELECT * FROM tasks where task_name like ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, "%" + name + "%");
+            ResultSet r = stmt.executeQuery();
+            ArrayList<Task> tasks = new ArrayList<Task>();
+            while (r.next()) {
+                tasks.add(new Task(r.getInt(COL_PRIMARY_KEY),
+                                   r.getString(COL_TASK_NAME)));
+            }
+            return tasks;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
 
 }
