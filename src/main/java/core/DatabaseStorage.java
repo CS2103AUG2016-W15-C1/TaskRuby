@@ -101,6 +101,7 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
     
+    @Override
     public Task getTaskById(int id) throws StorageException {
         String query = "SELECT * from tasks where id = ?";
         PreparedStatement stmt;
@@ -162,6 +163,18 @@ public class DatabaseStorage implements StorageBackend {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
+    
+    @Override
+    public void deleteLastTask() throws StorageException {
+        String query = "SELECT * FROM tasks ORDER BY id DESC";
+        try {
+            ResultSet r = runQuery(query);
+            deleteTask(r.getInt(COL_PRIMARY_KEY));
+            
+        } catch (SQLException e) {
             throw new StorageException(e.getMessage());
         }
     }

@@ -15,7 +15,7 @@ public class AddCommandTest {
     public void setUp() throws Exception {
         storage = new DatabaseStorage("testAddCommand.db");
         storage.initializeStorage();
-        addCommand = new AddCommand(this.storage);
+        addCommand = new AddCommand(this.storage, null);
     }
 
     @After
