@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -21,17 +20,20 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView layoutX="55.0" layoutY="67.0" prefHeight="381.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+                        <TableView layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                           <columns>
-                            <TableColumn prefWidth="420.0" text="Task ID &amp; Name" />
-                            <TableColumn prefWidth="176.0" text="Status" />
+                            <TableColumn prefWidth="55.0" text="Priority" />
+                            <TableColumn prefWidth="50.0" text="Task ID" />
+                              <TableColumn prefWidth="148.0" text="Task Name" />
+                              <TableColumn prefWidth="89.0" text="Start Date" />
+                              <TableColumn prefWidth="75.0" text="End Date" />
+                              <TableColumn prefWidth="75.0" text="Status" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <DatePicker layoutX="420.0" prefHeight="66.0" prefWidth="178.0" />
-                        <TextField layoutX="14.0" layoutY="21.0" prefHeight="25.0" prefWidth="390.0" />
+                        <TextField layoutX="131.0" layoutY="20.0" prefHeight="25.0" prefWidth="416.0" />
                      </children>
                   </AnchorPane>
               </items>
