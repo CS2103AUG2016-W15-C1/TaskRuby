@@ -28,25 +28,30 @@ public class UndoCommand extends BaseCommand {
             throw new CommandException("undo do not take in args");
         }
         String lastCommand = main.getLastCommand();
-        logger.info("trying to undo command: " + lastCommand);
-        String[] tokens = lastCommand.split("\\s+");
-        if (tokens[0].equals("add"))
-			try {
-				storage.deleteLastTask();
-			} catch (StorageException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        else if (tokens[0].equals("delete"))
-        	try {
-                Task t = new Task(String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
-                logger.info("trying to add task: " + String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
-                storage.addTask(t);
-            } catch (StorageException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                throw new CommandException(e.getMessage());
-            }
+        if (lastCommand.equals(""))
+        	logger.info("nothing to undo");
+        else {
+		    logger.info("trying to undo command: " + lastCommand);
+		    String[] tokens = lastCommand.split("\\s+");
+		    if (tokens[0].equals("add"))
+				try {
+					storage.deleteLastTask();
+				} catch (StorageException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    else if (tokens[0].equals("delete"))
+		    	try {
+		            Task t = new Task(String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
+		            logger.info("trying to add task: " + String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
+		            storage.addTask(t);
+		        } catch (StorageException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		            throw new CommandException(e.getMessage());
+		        }
+		    main.setLastCommand("");
+        }
     }
 
 }
