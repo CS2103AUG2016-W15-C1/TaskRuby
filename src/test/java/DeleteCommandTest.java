@@ -22,7 +22,7 @@ public class DeleteCommandTest {
     public void setUp() throws Exception {
         storage = new DatabaseStorage("DeleteCommandTest.db");
         storage.initializeStorage();
-        deleteCommand = new DeleteCommand(storage);
+        deleteCommand = new DeleteCommand(storage, null);
 
     }
 
