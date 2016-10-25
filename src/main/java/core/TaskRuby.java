@@ -106,8 +106,6 @@ public class TaskRuby extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            //TaskController controller = loader.getController();
-            //controller.setMain(this);
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -120,8 +118,8 @@ public class TaskRuby extends Application {
             AnchorPane taskOverview = (AnchorPane) loader.load();
             rootLayout.setCenter(taskOverview);
             
-            //TaskController controller = loader.getController();
-            //controller.setMain(this);
+            TaskController controller = loader.getController();
+            controller.setMain(this);
         } catch(IOException e) {
             e.printStackTrace();
         }

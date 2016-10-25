@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -20,11 +20,11 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
+                        <TableView fx:id="taskTableView" layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                           <columns>
-                            <TableColumn prefWidth="55.0" text="Priority" />
+                            <TableColumn fx:id="priorityColumn" prefWidth="55.0" text="Priority" />
                             <TableColumn prefWidth="50.0" text="Task ID" />
-                              <TableColumn prefWidth="148.0" text="Task Name" />
+                              <TableColumn fx:id="taskNameColumn" prefWidth="148.0" text="Task Name" />
                               <TableColumn prefWidth="89.0" text="Start Date" />
                               <TableColumn prefWidth="75.0" text="End Date" />
                               <TableColumn prefWidth="75.0" text="Status" />
@@ -33,7 +33,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TextField layoutX="131.0" layoutY="20.0" prefHeight="25.0" prefWidth="416.0" />
+                        <TextField fx:id="commandField" layoutX="131.0" layoutY="20.0" prefHeight="25.0" prefWidth="416.0" />
                      </children>
                   </AnchorPane>
               </items>
