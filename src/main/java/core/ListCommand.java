@@ -1,7 +1,7 @@
 package core;
 
 public class ListCommand extends BaseCommand {
-    
+
     private TaskRuby main;
 
     public ListCommand(StorageBackend storage, TaskRuby main) {
@@ -12,7 +12,9 @@ public class ListCommand extends BaseCommand {
 
     @Override
     public void execute(String[] args) throws CommandException {
-        this.main.toggleVisible();
+        if (!this.main.getTaskListVisibility()) {
+            this.main.toggleVisible();
+        }
     }
 
     @Override
