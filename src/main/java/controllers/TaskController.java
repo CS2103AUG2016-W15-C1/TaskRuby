@@ -5,6 +5,7 @@ import core.CommandException;
 import core.ParseException;
 import core.StorageException;
 import core.TaskRuby;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -31,6 +32,10 @@ public class TaskController {
     private TableColumn<Task, String> priorityColumn;
     @FXML
     private TableColumn<Task, String> taskNameColumn;
+    @FXML
+    private TableColumn<Task, Integer> taskIdColumn;
+    @FXML
+    private TableColumn<Task, String> taskStartTimeColumn;
     
     private void parseInput(String input) {
         commandField.setText("");
@@ -55,6 +60,9 @@ public class TaskController {
     private void initialize() {
         taskNameColumn.setCellValueFactory(cellData ->
             cellData.getValue().taskShortName());
+        taskIdColumn.setCellValueFactory(c -> c.getValue().taskIdentifier().asObject());
+        taskStartTimeColumn.setCellValueFactory(c ->
+            new ReadOnlyStringWrapper(c.getValue().getTaskStartTime()));
         
         commandField.setOnAction(event ->
             parseInput(commandField.getText()));

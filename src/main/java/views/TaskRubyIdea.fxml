@@ -23,9 +23,9 @@
                         <TableView fx:id="taskTableView" layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                           <columns>
                             <TableColumn fx:id="priorityColumn" prefWidth="55.0" text="Priority" />
-                            <TableColumn prefWidth="50.0" text="Task ID" />
+                            <TableColumn fx:id="taskIdColumn" prefWidth="50.0" text="Task ID" />
                               <TableColumn fx:id="taskNameColumn" prefWidth="148.0" text="Task Name" />
-                              <TableColumn prefWidth="89.0" text="Start Date" />
+                              <TableColumn fx:id="taskStartTimeColumn" prefWidth="89.0" text="Start Date" />
                               <TableColumn prefWidth="75.0" text="End Date" />
                               <TableColumn prefWidth="75.0" text="Status" />
                           </columns>

@@ -25,7 +25,7 @@ public class DatabaseStorage implements StorageBackend {
     private static final int COL_PRIMARY_KEY = 1;
     private static final int COL_TASK_NAME = 2;
     private static final int COL_CREATED_DATE = 3;
-    private static final int COL_DUE_DATE = 4;
+    private static final int COL_START_TIME = 4;
     
     public DatabaseStorage(String file) {
         if (file == "") file = this.fileName;
@@ -53,7 +53,8 @@ public class DatabaseStorage implements StorageBackend {
     @Override
     public void initializeStorage() throws StorageException {
         String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                       "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')))";
+                       "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')), " +
+                       "DATETIME DEFAULT (datetime('now','localtime')))";
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(query);
@@ -93,7 +94,8 @@ public class DatabaseStorage implements StorageBackend {
             ResultSet r = runQuery(query);
             while (r.next()) {
                 taskList.add(new Task(r.getInt(COL_PRIMARY_KEY),
-                                      r.getString(COL_TASK_NAME)));
+                                      r.getString(COL_TASK_NAME),
+                                      r.getString(COL_START_TIME)));
             }
         } catch (SQLException e) {
             throw new StorageException(e.getMessage());
@@ -111,7 +113,9 @@ public class DatabaseStorage implements StorageBackend {
             
             if (!r.next()) throw new StorageException("unable to fetch task with that id");
             else {
-                Task t = new Task(r.getInt(COL_PRIMARY_KEY), r.getString(COL_TASK_NAME));
+                Task t = new Task(r.getInt(COL_PRIMARY_KEY),
+                                  r.getString(COL_TASK_NAME),
+                                  r.getString(COL_START_TIME));
                 return t;
             }
         } catch (SQLException e) {

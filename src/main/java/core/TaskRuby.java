@@ -45,8 +45,7 @@ public class TaskRuby extends Application {
             e.printStackTrace();
         }
         testTasks = FXCollections.observableArrayList(
-                    new Task("test task 1"),
-                    new Task("test task 2")
+
                 );
     }
     
