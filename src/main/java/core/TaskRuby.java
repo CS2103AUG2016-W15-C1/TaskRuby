@@ -1,9 +1,7 @@
 package core;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import controllers.TaskController;
@@ -45,8 +43,7 @@ public class TaskRuby extends Application {
             e.printStackTrace();
         }
         testTasks = FXCollections.observableArrayList(
-                    new Task("test task 1"),
-                    new Task("test task 2")
+
                 );
     }
     
@@ -114,7 +111,7 @@ public class TaskRuby extends Application {
     public void initTaskOverviewLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(TaskRuby.class.getResource("/views/TaskOverview.fxml"));
+            loader.setLocation(TaskRuby.class.getResource("/views/TaskRubyIdea.fxml"));
             AnchorPane taskOverview = (AnchorPane) loader.load();
             rootLayout.setCenter(taskOverview);
             
