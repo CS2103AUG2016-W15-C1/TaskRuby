@@ -1,14 +1,10 @@
-User Guide
+﻿User Guide
 ==========
 
 -   [Introduction](#introduction)
-
 -   [Quick Start](#quick-start)
-
 -   [Features](#features)
-
 -   [FAQ](#faq)
-
 -   [Command Summary](#command-summary)
 
 INTRODUCTION
@@ -28,69 +24,61 @@ QUICK START
     your computer.
 
 > Having any Java 8 version is not enough. This application will not
-> work with earlier\
-> versions of Java 8.
+> work with earlier versions of Java 8.
 
-1.  Download the latest `RubyTask.jar` from the
-    [releases](../../../releases) tab.
+2.  Download the latest `RubyTask.jar` from the [releases](../../../releases) tab.
 
-2.  Copy the file to the folder you want to use as the home folder for
-    your RubyTask application.
+3.  Copy the file to the folder you want to use as the home folder for your RubyTask application.
 
-3.  Double-click the file to start the application. The GUI should
+4.  Double-click the file to start the application. The GUI should
     appear in a few seconds.
+    > <img src="images/Ui.png" width="600"><br>
+*Figure 1. GUI Display*
 
-![](media/image1.png){width="5.010416666666667in"
-height="3.223950131233596in"}\
-Figure 1: GUI Display
-
-1.  Type the command in the command box and press Enter to execute it.\
-    e.g. typing `help` and pressing Enter will open the help window.\
-    \
+5.  Type the command in the command box and press Enter to execute it.
+    e.g. typing `help` and pressing Enter will open the help window.
     Some example commands you can try:
 
--   `list` : lists all tasks to do.
+>-   `list` : lists all tasks to do.
 
--   `add`
-    `Buy vegetables i/From the supermarket d/05102016 s/1400 e/1500 t/2 r/n`
+>-   `add`
+    `Buy vegetables i/From the supermarket d/20160510 s/1400 e/1500 t/2 r/n`
     : adds a task named `Buy vegetables` to RubyTask.
 
--   `delete` `Buy vegetables` : deletes the 'Buy vegetables' task
+>-   `delete` `Buy vegetables` : deletes the 'Buy vegetables' task
     from RubyTask.
 
--   `e``xit`` `: exits RubyTask.
+>-   `exit` : exits RubyTask.
 
-1.  Refer to the [Features](#features) section below for details of
+6.  Refer to the [Features](#features) section below for details of
     each command.
 
-FEATURES\
+FEATURES
 ---------
 
 > Command Format
 
--   <span id="viewing-help-help"
+>-   <span id="viewing-help-help"
     class="anchor"></span>`Words in UPPER_CASE are the parameters.`
 
--   `Items in SQUARE_BRACKETS are optional.`
+>-   `Items in SQUARE_BRACKETS are optional.`
 
--   `Items with … after them can have multiple instances`.
+>-   `Items with … after them can have multiple instances`.
 
--   `The order of parameters is fixed.`
+>-   `The order of parameters is fixed.`
 
-#### 
+#### Viewing help: `help` 
 
-#### Viewing help: `help` {#viewing-help-help-1}
+Displays the available commands.
 
-Displays the available commands.\
 Format: `help`
 
 > Help will also be shown if you enter an incorrect command e.g. `abcd`
 
-#### 
-
 #### Adding a task: `add`
 
-Adds a task to RubyTask.\
+Adds a task to RubyTask.
+
 Format:
 `add TASK i/INFORMATION d/DATE s/START_TIME e/END_TIME t/LEVEL_OF_URGENCY_TAG r/RECUR_TAG`
 
