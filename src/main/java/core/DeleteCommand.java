@@ -1,7 +1,7 @@
 package core;
 
 import java.util.logging.Logger;
-
+//@@author A0130164W
 public class DeleteCommand extends BaseCommand {
 
     private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
