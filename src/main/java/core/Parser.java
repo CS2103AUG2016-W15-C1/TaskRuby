@@ -9,13 +9,18 @@ public class Parser {
         this.main = main;
     }
     
-    public void parse(String input) throws ParseException, CommandException, SQLException {
+    public void parse(String input) throws ParseException, CommandException {
         String[] tokens = input.split("\\s+");
         if (tokens.length == 0) 
             throw new ParseException("not enough args");
         BaseCommand command = main.getAvailableCommands().get(tokens[0]);
         if (command == null)
             throw new CommandException("command not found");
-        command.execute(Arrays.copyOfRange(tokens, 1, tokens.length));
+        try {
+            command.execute(Arrays.copyOfRange(tokens, 1, tokens.length));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            throw new CommandException(e.getMessage());
+        }
     }
 }

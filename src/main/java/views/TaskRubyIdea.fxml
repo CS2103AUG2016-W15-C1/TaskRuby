@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskController">
+   <children>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+      <AnchorPane prefHeight="450.0" prefWidth="600.0">
+         <children>
+            <SplitPane layoutX="217.0" layoutY="153.0" prefHeight="450.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TableView fx:id="taskTableView" layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
+                          <columns>
+                            <TableColumn fx:id="taskPriority" prefWidth="55.0" text="Priority" />
+                            <TableColumn fx:id="taskIdColumn" prefWidth="50.0" text="Task ID" />
+                              <TableColumn fx:id="taskNameColumn" prefWidth="148.0" text="Task Name" />
+                              <TableColumn fx:id="taskStartTimeColumn" prefWidth="89.0" text="Start Date" />
+                              <TableColumn prefWidth="75.0" text="End Date" />
+                              <TableColumn fx:id="taskStatus" prefWidth="75.0" text="Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField fx:id="commandField" layoutX="131.0" layoutY="20.0" prefHeight="25.0" prefWidth="416.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
