@@ -3,6 +3,7 @@ package core;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,11 +33,12 @@ public class TaskRuby extends Application {
         parser = new Parser(this);
         commandList = new HashMap<String, BaseCommand>();
         
-        commandList.put("add", new AddCommand(storage));
-        commandList.put("delete", new DeleteCommand(storage));
+        commandList.put("add", new AddCommand(storage, this));
+        commandList.put("delete", new DeleteCommand(storage, this));
         commandList.put("clear", new ClearCommand(storage));
         commandList.put("list", new ListCommand(storage, this));
-        
+        commandList.put("undo", new UndoCommand(storage, this));
+        lastCommand = "";
 
         try {
             System.out.println(storage.getNextAvailableIdentifier());
@@ -55,6 +57,7 @@ public class TaskRuby extends Application {
     private ObservableList<Task> testTasks;
     private DatabaseStorage storage;
     private Parser parser;
+    private String lastCommand;
     
     private boolean isVisible = false;
     
@@ -87,6 +90,14 @@ public class TaskRuby extends Application {
     
     public HashMap<String, BaseCommand> getAvailableCommands() {
         return commandList;
+    }
+    
+    public String getLastCommand() {
+    	return lastCommand;
+    }
+    
+    public void setLastCommand(String input) {
+    	lastCommand = input;
     }
 
     @Override

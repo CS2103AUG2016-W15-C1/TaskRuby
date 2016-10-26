@@ -1,4 +1,5 @@
 package controllers;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import core.CommandException;
@@ -23,7 +24,7 @@ public class TaskController {
     
     private TaskRuby main;
     
-    private void parseInput(String input) {
+    private void parseInput(String input) throws SQLException {
         commandField.setText("");
         logger.info("trying to parse input to textField: " + input);
         try {
@@ -70,7 +71,14 @@ public class TaskController {
             );
         
         commandField.setOnAction(event ->
-            parseInput(commandField.getText()));
+            {
+				try {
+					parseInput(commandField.getText());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
     }
     
 

@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -10,9 +11,11 @@ public class AddCommand extends BaseCommand {
     private static final Logger logger = Logger.getLogger(AddCommand.class.getName());
     
     private static final String helpString = "add <task>";
+    private TaskRuby main;
 
-    public AddCommand(StorageBackend storage) {
+    public AddCommand(StorageBackend storage, TaskRuby main) {
         super(storage);
+        this.main = main;
         // TODO Auto-generated constructor stub
     }
 
@@ -22,7 +25,7 @@ public class AddCommand extends BaseCommand {
     }
 
     @Override
-    public void execute(String[] args) throws CommandException {
+    public void execute(String[] args) throws CommandException, SQLException {
         if (args.length == 0) {
             throw new CommandException("empty arguments");
         }
@@ -32,6 +35,7 @@ public class AddCommand extends BaseCommand {
             Task t = new Task(desc);
             logger.info("trying to add task: " + desc);
             storage.addTask(t);
+            main.setLastCommand("add " + desc);
         } catch (StorageException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
