@@ -1,11 +1,13 @@
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import core.TaskRuby;
 import core.CommandException;
 import core.DatabaseStorage;
 import core.DeleteCommand;
@@ -17,12 +19,14 @@ public class DeleteCommandTest {
     
     private StorageBackend storage;
     private DeleteCommand deleteCommand;
+    private static TaskRuby main;
 
     @Before
     public void setUp() throws Exception {
         storage = new DatabaseStorage("DeleteCommandTest.db");
         storage.initializeStorage();
-        deleteCommand = new DeleteCommand(storage, null);
+        main = new TaskRuby();
+        deleteCommand = new DeleteCommand(storage, main);
 
     }
 
@@ -32,7 +36,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteByIdTest() {
+    public void deleteByIdTest() throws SQLException {
         String[] cmd = {"2"};
         String[] cmd2 = {"1"};
         

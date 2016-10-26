@@ -57,7 +57,7 @@ public class TaskRuby extends Application {
     private ObservableList<Task> testTasks;
     private DatabaseStorage storage;
     private Parser parser;
-    private static String lastCommand;
+    private String lastCommand;
     
     private boolean isVisible = false;
     

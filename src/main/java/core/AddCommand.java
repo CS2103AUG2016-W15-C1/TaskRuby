@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ public class AddCommand extends BaseCommand {
     }
 
     @Override
-    public void execute(String[] args) throws CommandException {
+    public void execute(String[] args) throws CommandException, SQLException {
         if (args.length == 0) {
             throw new CommandException("empty arguments");
         }

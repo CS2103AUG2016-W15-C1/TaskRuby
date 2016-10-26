@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class UndoCommand extends BaseCommand {
     }
 
     @Override
-    public void execute(String[] args) throws CommandException {
+    public void execute(String[] args) throws CommandException, SQLException {
         if (args.length > 0) {
             throw new CommandException("undo do not take in args");
         }

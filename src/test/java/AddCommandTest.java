@@ -1,10 +1,13 @@
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import core.AddCommand;
+import core.TaskRuby;
 import core.CommandException;
 import core.DatabaseStorage;
 
@@ -15,7 +18,8 @@ public class AddCommandTest {
     public void setUp() throws Exception {
         storage = new DatabaseStorage("testAddCommand.db");
         storage.initializeStorage();
-        addCommand = new AddCommand(this.storage, null);
+        TaskRuby main = new TaskRuby();
+        addCommand = new AddCommand(this.storage, main);
     }
 
     @After
@@ -30,7 +34,7 @@ public class AddCommandTest {
     }
     
     @Test
-    public void emptyArgument() {
+    public void emptyArgument() throws SQLException {
         String[] stubArgs = {};
         try {
             addCommand.execute(stubArgs);

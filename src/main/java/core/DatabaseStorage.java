@@ -63,14 +63,17 @@ public class DatabaseStorage implements StorageBackend {
     }
 
     @Override
-    public void deleteStorage() {
+    public void deleteStorage() throws SQLException {
         File file = new File(fileName);
+        file.setWritable(true);
+        conn.close();
         file.delete();
     }
     
     public void addTask(Task task) throws StorageException {
         logger.info("trying to add task to database");
         String query = "INSERT INTO tasks(task_name) VALUES(?)";
+        System.out.println("1111");
         PreparedStatement stmt;
         
         try {
@@ -84,6 +87,7 @@ public class DatabaseStorage implements StorageBackend {
             logger.severe(e.getMessage());
             throw new StorageException(e.getMessage());
         }
+        
     }
     
     public ArrayList<Task> getTasks() throws StorageException {
