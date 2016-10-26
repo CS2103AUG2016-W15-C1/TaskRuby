@@ -20,22 +20,22 @@ Internet-independent!
 QUICK START
 -----------
 
-1.  Ensure you have Java version `1.8.0_60` or later installed in
-    your computer.
+0.  Ensure you have Java version `1.8.0_60` or later installed in
+    your computer. <br>
 
-> Having any Java 8 version is not enough. This application will not
-> work with earlier versions of Java 8.
+    > Having any Java 8 version is not enough. This application will not
+    > work with earlier versions of Java 8.
 
-2.  Download the latest `RubyTask.jar` from the [releases](../../../releases) tab.
+1.  Download the latest `RubyTask.jar` from the [releases](../../../releases) tab.
 
-3.  Copy the file to the folder you want to use as the home folder for your RubyTask application.
+2.  Copy the file to the folder you want to use as the home folder for your RubyTask application.
 
-4.  Double-click the file to start the application. The GUI should
+3.  Double-click the file to start the application. The GUI should
     appear in a few seconds.
     > <img src="images/Ui.png" width="600"><br>
 *Figure 1. GUI Display*
 
-5.  Type the command in the command box and press Enter to execute it.
+4.  Type the command in the command box and press Enter to execute it.
     e.g. typing `help` and pressing Enter will open the help window.
 
     Some example commands you can try:
@@ -48,18 +48,17 @@ QUICK START
     from RubyTask.
     >-   `exit` : exits RubyTask.
 
-6.  Refer to the [Features](#features) section below for details of
+5.  Refer to the [Features](#features) section below for details of
     each command.
 
 FEATURES
 ---------
 
 > Command Format
->-   <span id="viewing-help-help"
-    class="anchor"></span>`Words in UPPER_CASE are the parameters.`
->-   `Items in SQUARE_BRACKETS are optional.`
->-   `Items with … after them can have multiple instances`.
->-   `The order of parameters is fixed.`
+>-   Words in UPPER_CASE are the parameters.
+>-   Items in SQUARE_BRACKETS are optional.
+>-   Items with … after them can have multiple instances.
+>-   The order of parameters is fixed.
 
 #### Viewing help: `help` 
 
@@ -106,20 +105,21 @@ Format: `hide`
 
 #### Finding tasks: `find`
 
-Finds tasks which contain any of the given keywords in the task name.\
+Finds tasks which contain any of the given keywords in the task name.
+
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > Only the task name is searched (case insensitive)
 
-> Order of the keywords does not matter: e.g. **find**
+> Order of the keywords does not matter: e.g. `find`
 > `CS2103T Tutorial` will match `Tutorial CS2103T`
 
-> Only full words will be matched: e.g. **find** `CS2103T` will not
+> Only full words will be matched: e.g. `find` `CS2103T` will not
 > match
 > `CS2103` but `find CS2103` will match `CS2103` and `CS2103T`
 
 > Tasks matching at least one keyword will be returned (i.e. `OR`
-> search): e.g. **find** `CS2103T` will match `CS2103T Tutorial`
+> search): e.g. `find` `CS2103T` will match `CS2103T Tutorial`
 
 Examples:
 
@@ -176,7 +176,7 @@ Format: `undo`
 
 Examples:
 
--   `add Buy vegetables i/From the supermarket d/05102016 s/1400 e/1500 t/2 r/n`**,**
+-   `add Buy vegetables i/From the supermarket d/05102016 s/1400 e/1500 t/2 r/n`, 
     `undo` : Undo latest add command, removes ‘Buy vegetables’ task
 
 -   `find CS2103T`, `delete 1`, `undo`: Undo latest delete command,
@@ -215,11 +215,11 @@ file?
 
 **Q**: How do I check the current Java version installed on my PC?
 
-**A**: Press the windows (or start menu) button, and type ‘About Java’, hit `Enter`. There will be a pop-up (as illustrated in Figure 2)
+**A**: Press the windows (or start menu) button, and type ‘About Java’, hit `Enter`. There will be a pop-up (see Figure 2 below)
 indicating the current Java version on your PC.
 > <img src="images/AboutJava.png" width="300"><br>
 
-*Figure 2. About Java pop-up*
+>*Figure 2. About Java pop-up*
 
 **Q**: How do I transfer my data to another computer?
 
