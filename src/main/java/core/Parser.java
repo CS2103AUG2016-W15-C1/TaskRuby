@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Parser {
@@ -8,7 +9,7 @@ public class Parser {
         this.main = main;
     }
     
-    public void parse(String input) throws ParseException, CommandException {
+    public void parse(String input) throws ParseException, CommandException, SQLException {
         String[] tokens = input.split("\\s+");
         if (tokens.length == 0) 
             throw new ParseException("not enough args");

@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.UUID;
 
 import org.junit.After;
@@ -51,7 +52,7 @@ public class ClearCommandTest {
     
 
     @Test
-    public void clearCommandTest() {
+    public void clearCommandTest() throws SQLException {
         String[] stubArgs = {};
         try {
             for (int i = 0; i < 10; i++) {

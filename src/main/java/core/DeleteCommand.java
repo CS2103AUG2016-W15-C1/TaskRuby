@@ -1,14 +1,17 @@
 package core;
 
 import java.util.logging.Logger;
+import models.Task;
 
 public class DeleteCommand extends BaseCommand {
 
     private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
     private static final String helpString = "delete id";
+    private TaskRuby main;
     
-    public DeleteCommand(StorageBackend storage) {
+    public DeleteCommand(StorageBackend storage, TaskRuby main) {
         super(storage);
+        this.main = main;
     }
 
     @Override
@@ -17,7 +20,9 @@ public class DeleteCommand extends BaseCommand {
             throw new CommandException("not enough arguments");
         }
         try {
+        	Task taskToBeDeleted = storage.getTaskById(Integer.parseInt(args[0]));
             storage.deleteTask(Integer.parseInt(args[0]));
+        	main.setLastCommand("delete " + taskToBeDeleted.getTaskShortName());
         } catch (NumberFormatException | StorageException e) {
             e.printStackTrace();
             throw new CommandException(e.getMessage());
