@@ -1,5 +1,5 @@
 package core;
-
+//@author A0108515L
 public class HideCommand extends BaseCommand {
 
     private TaskRuby main;
