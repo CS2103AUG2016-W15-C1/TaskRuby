@@ -32,6 +32,7 @@ public class TaskRuby extends Application {
         
         commandList.put("add", new AddCommand(storage, this));
         commandList.put("delete", new DeleteCommand(storage, this));
+        commandList.put("exit", new ExitCommand(storage));
         commandList.put("clear", new ClearCommand(storage));
         commandList.put("list", new ListCommand(storage, this));
         commandList.put("undo", new UndoCommand(storage, this));
