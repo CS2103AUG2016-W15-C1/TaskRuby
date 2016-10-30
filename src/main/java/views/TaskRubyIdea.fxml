@@ -5,8 +5,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -14,7 +16,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
         </items>
       </SplitPane>
-      <AnchorPane prefHeight="450.0" prefWidth="600.0">
+      <AnchorPane prefHeight="800.0" prefWidth="1200.0">
          <children>
             <SplitPane layoutX="217.0" layoutY="153.0" prefHeight="450.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -22,8 +24,8 @@
                      <children>
                         <TableView fx:id="taskTableView" layoutX="55.0" layoutY="59.0" prefHeight="389.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                           <columns>
-                            <TableColumn fx:id="taskPriority" prefWidth="55.0" text="Priority" />
-                            <TableColumn fx:id="taskIdColumn" prefWidth="50.0" text="Task ID" />
+                            <TableColumn fx:id="taskPriority" prefWidth="126.0" text="Priority" />
+                            <TableColumn fx:id="taskIdColumn" prefWidth="272.0" text="Task ID" />
                               <TableColumn fx:id="taskNameColumn" prefWidth="148.0" text="Task Name" />
                               <TableColumn fx:id="taskStartTimeColumn" prefWidth="89.0" text="Start Date" />
                               <TableColumn prefWidth="75.0" text="End Date" />
@@ -33,7 +35,16 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TextField fx:id="commandField" layoutX="131.0" layoutY="20.0" prefHeight="25.0" prefWidth="416.0" />
+                        <TextField fx:id="commandField" layoutX="149.0" layoutY="10.0" prefHeight="44.0" prefWidth="909.0" promptText="e.g list">
+                           <font>
+                              <Font size="20.0" />
+                           </font></TextField>
+                        <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:" wrappingWidth="134.697265625">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        
                      </children>
                   </AnchorPane>
               </items>
