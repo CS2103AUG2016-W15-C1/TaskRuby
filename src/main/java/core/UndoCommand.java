@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import models.Task;
+import core.AddCommand;
 
 public class UndoCommand extends BaseCommand {
     
@@ -33,25 +34,20 @@ public class UndoCommand extends BaseCommand {
         if (lastCommand.equals(""))
         	logger.info("nothing to undo");
         else {
-		    logger.info("trying to undo command: " + lastCommand);
+		    logger.info("Undo command");
 		    String[] tokens = lastCommand.split("\\s+");
 		    if (tokens[0].equals("add"))
 				try {
+					logger.info("trying to undo previous addition");
 					storage.deleteLastTask();
 				} catch (StorageException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    else if (tokens[0].equals("delete"))
-		    	try {
-		            Task t = new Task(String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
-		            logger.info("trying to add task: " + String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)));
-		            storage.addTask(t);
-		        } catch (StorageException e) {
-		            // TODO Auto-generated catch block
-		            e.printStackTrace();
-		            throw new CommandException(e.getMessage());
-		        }
+		    else if (tokens[0].equals("delete")) {
+				logger.info("trying to undo previous deletion");
+				new AddCommand(storage, main).execute(Arrays.copyOfRange(tokens, 1, tokens.length));
+			}
 		    main.setLastCommand("");
         }
     }

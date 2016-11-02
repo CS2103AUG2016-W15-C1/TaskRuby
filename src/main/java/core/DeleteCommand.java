@@ -22,7 +22,10 @@ public class DeleteCommand extends BaseCommand {
         try {
         	Task taskToBeDeleted = storage.getTaskById(Integer.parseInt(args[0]));
             storage.deleteTask(Integer.parseInt(args[0]));
-        	main.setLastCommand("delete " + taskToBeDeleted.getTaskShortName());
+        	main.setLastCommand("delete " + taskToBeDeleted.getTaskShortName() + 
+        			            " -d " + taskToBeDeleted.getTaskStartTime() + 
+        			            " -D " + taskToBeDeleted.getTaskDeadline() +
+        			            " -p " + taskToBeDeleted.getTaskPriority());
         } catch (NumberFormatException | StorageException e) {
             e.printStackTrace();
             throw new CommandException(e.getMessage());
