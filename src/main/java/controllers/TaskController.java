@@ -39,6 +39,8 @@ public class TaskController {
     private TableColumn<Task, String> taskPriority;
     @FXML
     private TableColumn<Task, String> taskStatus;
+    @FXML
+    private TableColumn<Task, String> taskEndDateColumn;
     
     private void parseInput(String input) {
         commandField.setText("");
@@ -68,7 +70,8 @@ public class TaskController {
             new ReadOnlyStringWrapper(c.getValue().getTaskStartTime()));
         taskStatus.setCellValueFactory(c -> c.getValue().taskStatus());
         taskPriority.setCellValueFactory(c -> c.getValue().taskPriority());
-        
+        taskEndDateColumn.setCellValueFactory(c -> 
+        	new ReadOnlyStringWrapper(c.getValue().getTaskDeadline()));
         commandField.setOnAction(event ->
 				parseInput(commandField.getText())
 			);
