@@ -48,8 +48,8 @@ public class AddCommand extends BaseCommand {
         }
         // System.out.println(args.length);
         try {
-            String desc = "-t" + String.join(" ", Arrays.copyOfRange(args, 0, args.length));
-            String[] tokens = desc.split("-");
+            String desc = "\\t" + String.join(" ", Arrays.copyOfRange(args, 0, args.length));
+            String[] tokens = desc.split("\\\\");
             String taskDesc = "";
             LocalDateTime taskDue = null;
             LocalDateTime taskStart = null;
