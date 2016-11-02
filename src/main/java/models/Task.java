@@ -25,7 +25,8 @@ public class Task {
         this.taskIdentifier = new SimpleIntegerProperty(0);
     }
     
-    public Task(int taskId, String taskName, String startTime) {
+    public Task(int taskId, String taskName, String startTime, String dueDate,
+    		String priority) {
         /*
          * TODO
          * taskIdentifier is the primary identifier for each task and as such
@@ -36,12 +37,35 @@ public class Task {
          */
         this.taskIdentifier = new SimpleIntegerProperty(taskId);
         this.taskShortName = new SimpleStringProperty(taskName);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm");
+        LocalDateTime t = LocalDateTime.parse(startTime, formatter);
+        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
+        this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(
+        		LocalDateTime.parse(dueDate, formatter));
+        
+        this.taskPriority = new SimpleStringProperty(priority);
+        this.taskStatus = new SimpleStringProperty("not done");
+    }
+    
+    public Task(String taskName, LocalDateTime startDate, 
+    		LocalDateTime taskDue, String information, String priority) {
+    	this.taskShortName = new SimpleStringProperty(taskName);
+    	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(startDate);
+    	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(taskDue);
+    	this.taskPriority = new SimpleStringProperty(priority);
+    }
+    
+/*    public Task(int taskId, String taskName, String startTime, String taskDue,
+    		String information, String priority) {
+
+        this.taskIdentifier = new SimpleIntegerProperty(taskId);
+        this.taskShortName = new SimpleStringProperty(taskName);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm");
         LocalDateTime t = LocalDateTime.parse(startTime, formatter);
         this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
         this.taskPriority = new SimpleStringProperty("NORMAL");
         this.taskStatus = new SimpleStringProperty("not done");
-    }
+    }*/
     
     public IntegerProperty taskIdentifier() {
         return taskIdentifier;
