@@ -1,20 +1,32 @@
 package models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Task {
     private IntegerProperty taskIdentifier;
     private final StringProperty taskShortName;
+    private ObjectProperty<LocalDateTime> taskStartTime;
+    private ObjectProperty<LocalDateTime> taskDeadline;
+    private StringProperty taskPriority; // this should be an enum
+    private StringProperty taskStatus;
     
     public Task(String taskName) {
         this.taskShortName = new SimpleStringProperty(taskName);
         this.taskIdentifier = new SimpleIntegerProperty(0);
     }
     
-    public Task(int taskId, String taskName) {
+    public Task(int taskId, String taskName, String startTime, String dueDate,
+    		String priority) {
         /*
          * TODO
          * taskIdentifier is the primary identifier for each task and as such
@@ -25,7 +37,35 @@ public class Task {
          */
         this.taskIdentifier = new SimpleIntegerProperty(taskId);
         this.taskShortName = new SimpleStringProperty(taskName);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm");
+        LocalDateTime t = LocalDateTime.parse(startTime, formatter);
+        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
+        this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(
+        		LocalDateTime.parse(dueDate, formatter));
+        
+        this.taskPriority = new SimpleStringProperty(priority);
+        this.taskStatus = new SimpleStringProperty("not done");
     }
+    
+    public Task(String taskName, LocalDateTime startDate, 
+    		LocalDateTime taskDue, String information, String priority) {
+    	this.taskShortName = new SimpleStringProperty(taskName);
+    	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(startDate);
+    	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(taskDue);
+    	this.taskPriority = new SimpleStringProperty(priority);
+    }
+    
+/*    public Task(int taskId, String taskName, String startTime, String taskDue,
+    		String information, String priority) {
+
+        this.taskIdentifier = new SimpleIntegerProperty(taskId);
+        this.taskShortName = new SimpleStringProperty(taskName);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm");
+        LocalDateTime t = LocalDateTime.parse(startTime, formatter);
+        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
+        this.taskPriority = new SimpleStringProperty("NORMAL");
+        this.taskStatus = new SimpleStringProperty("not done");
+    }*/
     
     public IntegerProperty taskIdentifier() {
         return taskIdentifier;
@@ -41,5 +81,38 @@ public class Task {
     
     public void setTaskIdentifier(int id) {
         this.taskIdentifier = new SimpleIntegerProperty(id);
+    }
+    
+    public StringProperty taskPriority() {
+        return taskPriority;
+    }
+    
+    public StringProperty taskStatus() {
+        return this.taskStatus;
+    }
+    
+    public void setTaskPriority(String p) {
+        this.taskPriority = new SimpleStringProperty(p);
+    }
+    
+    public String getTaskPriority() {
+    	return this.taskPriority.get().toString();
+    }
+    
+    public void setTaskDeadline(LocalDateTime time) {
+        this.taskDeadline.set(time);
+    }
+    
+    public String getTaskDeadline() {
+        return this.taskDeadline.get().toString();
+    }
+    
+    public void setTaskStartTime(LocalDateTime time) {
+        this.taskStartTime.set(time);
+    }
+    
+    public String getTaskStartTime() {
+        System.out.println(this.taskStartTime.get().toString());
+        return this.taskStartTime.get().toString();
     }
 }

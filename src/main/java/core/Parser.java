@@ -1,5 +1,6 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Parser {
@@ -15,6 +16,11 @@ public class Parser {
         BaseCommand command = main.getAvailableCommands().get(tokens[0]);
         if (command == null)
             throw new CommandException("command not found");
-        command.execute(Arrays.copyOfRange(tokens, 1, tokens.length));
+        try {
+            command.execute(Arrays.copyOfRange(tokens, 1, tokens.length));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            throw new CommandException(e.getMessage());
+        }
     }
 }

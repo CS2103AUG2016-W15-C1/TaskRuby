@@ -26,6 +26,8 @@ public class DatabaseStorage implements StorageBackend {
     private static final int COL_TASK_NAME = 2;
     private static final int COL_CREATED_DATE = 3;
     private static final int COL_DUE_DATE = 4;
+    private static final int COL_PRIORITY = 5;
+
     
     public DatabaseStorage(String file) {
         if (file == "") file = this.fileName;
@@ -53,8 +55,10 @@ public class DatabaseStorage implements StorageBackend {
     @Override
     public void initializeStorage() throws StorageException {
         String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                       "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')))";
+                       "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')), " +
+                       "due_date DATETIME DEFAULT (datetime('now', 'localtime')), priority VARCHAR(10))";
         try {
+        	System.out.println(query);
             Statement stmt = conn.createStatement();
             stmt.execute(query);
         } catch (SQLException e) {
@@ -63,19 +67,25 @@ public class DatabaseStorage implements StorageBackend {
     }
 
     @Override
-    public void deleteStorage() {
+    public void deleteStorage() throws SQLException {
         File file = new File(fileName);
+        file.setWritable(true);
+        conn.close();
         file.delete();
     }
     
     public void addTask(Task task) throws StorageException {
         logger.info("trying to add task to database");
-        String query = "INSERT INTO tasks(task_name) VALUES(?)";
+        String query = "INSERT INTO tasks(task_name, created_at, due_date, priority) VALUES(?, ?, ?, ?)";
+        System.out.println("1111");
         PreparedStatement stmt;
         
         try {
             stmt = conn.prepareStatement(query);
             stmt.setString(1, task.getTaskShortName());
+            stmt.setString(2, task.getTaskStartTime());
+            stmt.setString(3, task.getTaskDeadline());
+            stmt.setString(4, task.taskPriority().get());
             if (stmt.executeUpdate() != 1) {
                 throw new StorageException("unable to add task to database");
             }
@@ -84,6 +94,7 @@ public class DatabaseStorage implements StorageBackend {
             logger.severe(e.getMessage());
             throw new StorageException(e.getMessage());
         }
+        
     }
     
     public ArrayList<Task> getTasks() throws StorageException {
@@ -93,7 +104,10 @@ public class DatabaseStorage implements StorageBackend {
             ResultSet r = runQuery(query);
             while (r.next()) {
                 taskList.add(new Task(r.getInt(COL_PRIMARY_KEY),
-                                      r.getString(COL_TASK_NAME)));
+                                      r.getString(COL_TASK_NAME),
+                                      r.getString(COL_CREATED_DATE),
+                                      r.getString(COL_DUE_DATE),
+                                      r.getString(COL_PRIORITY)));
             }
         } catch (SQLException e) {
             throw new StorageException(e.getMessage());
@@ -101,6 +115,7 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
     
+    @Override
     public Task getTaskById(int id) throws StorageException {
         String query = "SELECT * from tasks where id = ?";
         PreparedStatement stmt;
@@ -111,7 +126,11 @@ public class DatabaseStorage implements StorageBackend {
             
             if (!r.next()) throw new StorageException("unable to fetch task with that id");
             else {
-                Task t = new Task(r.getInt(COL_PRIMARY_KEY), r.getString(COL_TASK_NAME));
+                Task t = new Task(r.getInt(COL_PRIMARY_KEY),
+                                  r.getString(COL_TASK_NAME),
+                                  r.getString(COL_CREATED_DATE),
+                                  r.getString(COL_DUE_DATE),
+                                  r.getString(COL_PRIORITY));
                 return t;
             }
         } catch (SQLException e) {
@@ -162,6 +181,18 @@ public class DatabaseStorage implements StorageBackend {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new StorageException(e.getMessage());
+        }
+    }
+    
+    @Override
+    public void deleteLastTask() throws StorageException {
+        String query = "SELECT * FROM tasks ORDER BY id DESC";
+        try {
+            ResultSet r = runQuery(query);
+            deleteTask(r.getInt(COL_PRIMARY_KEY));
+            
+        } catch (SQLException e) {
             throw new StorageException(e.getMessage());
         }
     }

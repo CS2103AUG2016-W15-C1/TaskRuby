@@ -32,7 +32,7 @@ public class DatabaseStorageTest {
      */
     @After
     public void tearDown() throws Exception {
-        storage.deleteStorage();
+    	storage.deleteStorage();
     }
     
     @Test
