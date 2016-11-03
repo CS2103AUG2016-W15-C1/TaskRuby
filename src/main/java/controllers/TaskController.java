@@ -54,7 +54,8 @@ public class TaskController {
         
         try {
             this.main.getTasks().clear();
-            this.main.getTasks().addAll(this.main.getStorage().getTasks());
+            if (this.main.getTaskListVisibility()) 
+            	this.main.getTasks().addAll(this.main.getStorage().getTasks());
         } catch (StorageException e) {
             e.printStackTrace();
             logger.severe(e.getMessage());
