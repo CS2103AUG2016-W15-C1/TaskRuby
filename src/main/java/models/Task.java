@@ -26,7 +26,7 @@ public class Task {
     }
     
     public Task(int taskId, String taskName, String startTime, String dueDate,
-    		String priority) {
+    		String priority, String status) {
         /*
          * TODO
          * taskIdentifier is the primary identifier for each task and as such
@@ -44,7 +44,7 @@ public class Task {
         		LocalDateTime.parse(dueDate, formatter));
         
         this.taskPriority = new SimpleStringProperty(priority);
-        this.taskStatus = new SimpleStringProperty("not done");
+        this.taskStatus = new SimpleStringProperty(status);
     }
     
     public Task(String taskName, LocalDateTime startDate, 
@@ -53,6 +53,7 @@ public class Task {
     	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(startDate);
     	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(taskDue);
     	this.taskPriority = new SimpleStringProperty(priority);
+    	this.taskStatus = new SimpleStringProperty("Not Done");
     }
     
 /*    public Task(int taskId, String taskName, String startTime, String taskDue,
@@ -89,6 +90,10 @@ public class Task {
     
     public StringProperty taskStatus() {
         return this.taskStatus;
+    }
+    
+    public String getTaskStatus() {
+    	return this.taskStatus.get().toString();
     }
     
     public void setTaskPriority(String p) {

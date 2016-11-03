@@ -27,6 +27,7 @@ public class DatabaseStorage implements StorageBackend {
     private static final int COL_CREATED_DATE = 3;
     private static final int COL_DUE_DATE = 4;
     private static final int COL_PRIORITY = 5;
+    private static final int COL_STATUS = 6;
 
     
     public DatabaseStorage(String file) {
@@ -56,9 +57,8 @@ public class DatabaseStorage implements StorageBackend {
     public void initializeStorage() throws StorageException {
         String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                        "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')), " +
-                       "due_date DATETIME DEFAULT (datetime('now', 'localtime')), priority VARCHAR(10))";
+                       "due_date DATETIME DEFAULT (datetime('now', 'localtime')), priority VARCHAR(10), status VARCHAR(10) DEFAULT('Not Done'));";
         try {
-        	System.out.println(query);
             Statement stmt = conn.createStatement();
             stmt.execute(query);
         } catch (SQLException e) {
@@ -77,7 +77,6 @@ public class DatabaseStorage implements StorageBackend {
     public void addTask(Task task) throws StorageException {
         logger.info("trying to add task to database");
         String query = "INSERT INTO tasks(task_name, created_at, due_date, priority) VALUES(?, ?, ?, ?)";
-        System.out.println("1111");
         PreparedStatement stmt;
         
         try {
@@ -97,6 +96,27 @@ public class DatabaseStorage implements StorageBackend {
         
     }
     
+    //@@author A0144017R
+    public void updateTaskStatus(int id, String status) throws StorageException {
+    	logger.info("trying to update task status");
+    	String query = "UPDATE tasks SET status = ? WHERE id = ?";
+    	PreparedStatement stmt;
+    	
+    	try {
+    		stmt = conn.prepareStatement(query);
+    		stmt.setString(1, status);
+    		stmt.setInt(2,  id);
+    		if (stmt.executeUpdate() != 1) {
+    			throw new StorageException("unable to update status of the task");
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		logger.severe(e.getMessage());
+    		throw new StorageException(e.getMessage());
+    	}
+    }
+    
+    
     public ArrayList<Task> getTasks() throws StorageException {
         String query = "SELECT * FROM tasks";
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -107,7 +127,8 @@ public class DatabaseStorage implements StorageBackend {
                                       r.getString(COL_TASK_NAME),
                                       r.getString(COL_CREATED_DATE),
                                       r.getString(COL_DUE_DATE),
-                                      r.getString(COL_PRIORITY)));
+                                      r.getString(COL_PRIORITY),
+                                      r.getString(COL_STATUS)));
             }
         } catch (SQLException e) {
             throw new StorageException(e.getMessage());
@@ -130,7 +151,8 @@ public class DatabaseStorage implements StorageBackend {
                                   r.getString(COL_TASK_NAME),
                                   r.getString(COL_CREATED_DATE),
                                   r.getString(COL_DUE_DATE),
-                                  r.getString(COL_PRIORITY));
+                                  r.getString(COL_PRIORITY),
+                                  r.getString(COL_STATUS));
                 return t;
             }
         } catch (SQLException e) {
