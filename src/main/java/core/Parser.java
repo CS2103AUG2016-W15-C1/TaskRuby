@@ -19,7 +19,6 @@ public class Parser {
         try {
             command.execute(Arrays.copyOfRange(tokens, 1, tokens.length));
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             throw new CommandException(e.getMessage());
         }
     }

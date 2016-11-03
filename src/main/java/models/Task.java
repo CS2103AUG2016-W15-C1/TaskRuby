@@ -19,6 +19,8 @@ public class Task {
     private ObjectProperty<LocalDateTime> taskDeadline;
     private StringProperty taskPriority; 
     private StringProperty taskStatus;
+    private boolean isFloating;
+    private boolean isDeadline;
     
     public Task(String taskName) {
         this.taskShortName = new SimpleStringProperty(taskName);
@@ -26,22 +28,25 @@ public class Task {
     }
     
     public Task(int taskId, String taskName, String startTime, String dueDate,
-    		String priority, String status) {
-        /*
-         * TODO
-         * taskIdentifier is the primary identifier for each task and as such
-         * it is the primary key in the storage medium that we should use
-         * right now I initialize it randomly because the storage controller
-         * has not been created yet
-         * 
-         */
+    		String priority, String status, String floating, String deadline) {
         this.taskIdentifier = new SimpleIntegerProperty(taskId);
         this.taskShortName = new SimpleStringProperty(taskName);
+        this.isFloating = Integer.parseInt(floating) == 1 ? true : false;
+        this.isDeadline = Integer.parseInt(deadline) == 1 ? true : false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm");
-        LocalDateTime t = LocalDateTime.parse(startTime, formatter);
-        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
-        this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(
-        		LocalDateTime.parse(dueDate, formatter));
+        if (!isFloating) {
+        	LocalDateTime t = LocalDateTime.parse(startTime, formatter);
+        	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
+        } else {
+        	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(LocalDateTime.now());
+        }
+        
+        if (!isDeadline) {
+        	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(
+        			LocalDateTime.parse(dueDate, formatter));
+        } else {
+        	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(LocalDateTime.now());
+        }
         
         this.taskPriority = new SimpleStringProperty(priority);
         this.taskStatus = new SimpleStringProperty(status);
@@ -49,27 +54,34 @@ public class Task {
     
     public Task(String taskName, LocalDateTime startDate, 
     		LocalDateTime taskDue, String information, String priority) {
+    	if (startDate == null) {
+    		System.out.println("cannot parse");
+    		isFloating = true;
+    		startDate = LocalDateTime.now();
+    	}
+    	
+    	if (taskDue == null) {
+    		isDeadline = true;
+    		taskDue = LocalDateTime.now();
+    	}
+    	
     	this.taskShortName = new SimpleStringProperty(taskName);
     	this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(startDate);
     	this.taskDeadline = new SimpleObjectProperty<LocalDateTime>(taskDue);
     	this.taskPriority = new SimpleStringProperty(priority);
-    	this.taskStatus = new SimpleStringProperty("Not Done");
+    	this.taskStatus = new SimpleStringProperty("Not Done");	
     }
-    
-/*    public Task(int taskId, String taskName, String startTime, String taskDue,
-    		String information, String priority) {
-
-        this.taskIdentifier = new SimpleIntegerProperty(taskId);
-        this.taskShortName = new SimpleStringProperty(taskName);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm");
-        LocalDateTime t = LocalDateTime.parse(startTime, formatter);
-        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(t);
-        this.taskPriority = new SimpleStringProperty("NORMAL");
-        this.taskStatus = new SimpleStringProperty("not done");
-    }*/
     
     public IntegerProperty taskIdentifier() {
         return taskIdentifier;
+    }
+    
+    public boolean isFloating() {
+    	return isFloating;
+    }
+    
+    public boolean isDeadline() {
+    	return isDeadline;
     }
     
     public StringProperty taskShortName() {
@@ -129,7 +141,7 @@ public class Task {
     }
     
     public String getTaskDeadline() {
-        return this.taskDeadline.get().toString();
+        return this.isDeadline ? "" : this.taskDeadline.get().toString();
     }
     
     public LocalDateTime getTaskDeadlineInDateTime() {
@@ -146,6 +158,6 @@ public class Task {
     
     public String getTaskStartTime() {
         System.out.println(this.taskStartTime.get().toString());
-        return this.taskStartTime.get().toString();
+        return this.isFloating ? "" : this.taskStartTime.get().toString();
     }
 }

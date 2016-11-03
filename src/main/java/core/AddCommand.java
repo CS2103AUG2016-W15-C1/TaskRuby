@@ -85,6 +85,7 @@ public class AddCommand extends BaseCommand {
                 }
             }
             logger.info("trying to add task: " + desc);
+            //logger.info(taskStart.toString());
             Task t = new Task(taskDesc, taskStart, taskDue, inf, priority);
             storage.addTask(t);
             main.setLastCommand("add " + desc);

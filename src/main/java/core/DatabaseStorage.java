@@ -29,6 +29,8 @@ public class DatabaseStorage implements StorageBackend {
     private static final int COL_DUE_DATE = 4;
     private static final int COL_PRIORITY = 5;
     private static final int COL_STATUS = 6;
+    private static final int COL_FLOATING = 7;
+    private static final int COL_DEADLINE = 8;
 
     
     public DatabaseStorage(String file) {
@@ -58,7 +60,8 @@ public class DatabaseStorage implements StorageBackend {
     public void initializeStorage() throws StorageException {
         String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                        "task_name VARCHAR(255), created_at DATETIME DEFAULT (datetime('now','localtime')), " +
-                       "due_date DATETIME DEFAULT (datetime('now', 'localtime')), priority VARCHAR(10), status VARCHAR(10) DEFAULT('Not Done'));";
+                       "due_date DATETIME DEFAULT (datetime('now', 'localtime')), priority VARCHAR(10), " +
+                       "status VARCHAR(10) DEFAULT('Not Done'), floating INTEGER, deadline INTEGER);";
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(query);
@@ -77,7 +80,7 @@ public class DatabaseStorage implements StorageBackend {
     
     public void addTask(Task task) throws StorageException {
         logger.info("trying to add task to database");
-        String query = "INSERT INTO tasks(task_name, created_at, due_date, priority) VALUES(?, ?, ?, ?)";
+        String query = "INSERT INTO tasks(task_name, created_at, due_date, priority, floating, deadline) VALUES(?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         
         try {
@@ -86,6 +89,8 @@ public class DatabaseStorage implements StorageBackend {
             stmt.setString(2, task.getTaskStartTime());
             stmt.setString(3, task.getTaskDeadline());
             stmt.setString(4, task.taskPriority().get());
+            stmt.setInt(5, task.isFloating() ? 1 : 0);
+            stmt.setInt(6, task.isDeadline() ? 1 : 0);
             if (stmt.executeUpdate() != 1) {
                 throw new StorageException("unable to add task to database");
             }
@@ -152,7 +157,9 @@ public class DatabaseStorage implements StorageBackend {
                                       r.getString(COL_CREATED_DATE),
                                       r.getString(COL_DUE_DATE),
                                       r.getString(COL_PRIORITY),
-                                      r.getString(COL_STATUS)));
+                                      r.getString(COL_STATUS),
+                                      r.getString(COL_FLOATING),
+                                      r.getString(COL_DEADLINE)));
             }
         } catch (SQLException e) {
             throw new StorageException(e.getMessage());
@@ -176,7 +183,9 @@ public class DatabaseStorage implements StorageBackend {
                                   r.getString(COL_CREATED_DATE),
                                   r.getString(COL_DUE_DATE),
                                   r.getString(COL_PRIORITY),
-                                  r.getString(COL_STATUS));
+                                  r.getString(COL_STATUS),
+                                  r.getString(COL_FLOATING),
+                                  r.getString(COL_DEADLINE));
                 return t;
             }
         } catch (SQLException e) {
