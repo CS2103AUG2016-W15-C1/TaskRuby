@@ -95,6 +95,10 @@ public class Task {
         this.taskPriority = new SimpleStringProperty(p);
     }
     
+    public String getTaskPriority() {
+    	return this.taskPriority.get().toString();
+    }
+    
     public void setTaskDeadline(LocalDateTime time) {
         this.taskDeadline.set(time);
     }
