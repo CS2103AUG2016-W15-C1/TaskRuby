@@ -127,7 +127,7 @@ public class DatabaseStorage implements StorageBackend {
     	logger.info("trying to edit task");
     	String query = "UPDATE tasks SET task_name = ?, created_at= ?, due_date = ?, priority = ?, status = ? where id = ?";
     	PreparedStatement stmt;
-    	
+    	System.out.println(task.isFloating());
     	try {
     		stmt=conn.prepareStatement(query);
     		stmt.setString(1, task.getTaskShortName());
@@ -137,7 +137,7 @@ public class DatabaseStorage implements StorageBackend {
             stmt.setString(5,  task.getTaskStatus());
     		stmt.setInt(6, id);
     		if (stmt.executeUpdate() != 1) {
-    			throw new StorageException("unable to update status of the task");    	
+    			throw new StorageException("unable to edit the task");    	
     		}
     	} catch (SQLException e) {
     		e.printStackTrace();

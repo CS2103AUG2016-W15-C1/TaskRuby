@@ -113,7 +113,10 @@ public class Task {
     }
     
     public String getTaskPriorityString() {
-    	return taskPriority.get().toString();
+    	if (this.taskPriority.get() == null)
+    		return null;
+    	else
+    		return taskPriority.get().toString();
     }
     
     public String getTaskPriority() {

@@ -51,7 +51,7 @@ public class EditCommand extends BaseCommand {
         	int taskId = Integer.parseInt(args[0]);
         	Task taskToBeEdited = storage.getTaskById(taskId);
             String desc = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-            String[] tokens = desc.split("-");
+            String[] tokens = desc.split("\\\\");
             String taskDesc = taskToBeEdited.getTaskShortName();
             LocalDateTime taskDue = taskToBeEdited.getTaskDeadlineInDateTime();
             LocalDateTime taskStart = taskToBeEdited.getTaskStartTimeInDateTime();
