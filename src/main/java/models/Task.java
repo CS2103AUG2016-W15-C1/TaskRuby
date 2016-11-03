@@ -17,7 +17,7 @@ public class Task {
     private final StringProperty taskShortName;
     private ObjectProperty<LocalDateTime> taskStartTime;
     private ObjectProperty<LocalDateTime> taskDeadline;
-    private StringProperty taskPriority; // this should be an enum
+    private StringProperty taskPriority; 
     private StringProperty taskStatus;
     
     public Task(String taskName) {
@@ -96,7 +96,23 @@ public class Task {
     }
     
     public String getTaskPriority() {
-    	return this.taskPriority.get().toString();
+        
+        
+       String priorityString = null;
+        
+        if (taskPriority.get().equals("HIGH")){
+            priorityString = "1";
+        }
+        
+        else if (taskPriority.get().equals("MED")){
+            priorityString = "2";
+        }
+        
+        else {
+            priorityString = "3";
+        }
+        
+    	return priorityString;
     }
     
     public void setTaskDeadline(LocalDateTime time) {
