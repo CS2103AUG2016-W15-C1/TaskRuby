@@ -38,7 +38,7 @@ public class AddCommand extends BaseCommand {
         }
         try {
 			CommandOptions o = Parser.genericParse(
-					String.join(" ", Arrays.copyOfRange(args, 0, args.length))
+					String.join(" ", args)
 					);
 			Task t = new Task(o.getTaskName(),
 							  o.getStartDate(),
@@ -46,6 +46,7 @@ public class AddCommand extends BaseCommand {
 							  "",
 							  o.getPriority());
 			storage.addTask(t);
+			main.setLastCommand("add \\t" + String.join(" ", args));
 		} catch (ParseException | StorageException e) {
 			throw new CommandException(e.getMessage());
 		}
