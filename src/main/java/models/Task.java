@@ -100,6 +100,10 @@ public class Task {
         this.taskPriority = new SimpleStringProperty(p);
     }
     
+    public String getTaskPriorityString() {
+    	return taskPriority.get().toString();
+    }
+    
     public String getTaskPriority() {
         
         
@@ -128,8 +132,16 @@ public class Task {
         return this.taskDeadline.get().toString();
     }
     
+    public LocalDateTime getTaskDeadlineInDateTime() {
+    	return this.taskDeadline.get();
+    }
+    
     public void setTaskStartTime(LocalDateTime time) {
         this.taskStartTime.set(time);
+    }
+    
+    public LocalDateTime getTaskStartTimeInDateTime() {
+    	return this.taskStartTime.get();
     }
     
     public String getTaskStartTime() {

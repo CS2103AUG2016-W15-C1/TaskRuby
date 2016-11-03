@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import models.Task;
@@ -116,6 +117,29 @@ public class DatabaseStorage implements StorageBackend {
     	}
     }
     
+    //@@author A0144017R
+    public void editTask(int id, Task task) throws StorageException {
+    	logger.info("trying to edit task");
+    	String query = "UPDATE tasks SET task_name = ?, created_at= ?, due_date = ?, priority = ?, status = ? where id = ?";
+    	PreparedStatement stmt;
+    	
+    	try {
+    		stmt=conn.prepareStatement(query);
+    		stmt.setString(1, task.getTaskShortName());
+    		stmt.setString(2, task.getTaskStartTime());
+            stmt.setString(3, task.getTaskDeadline());
+            stmt.setString(4, task.taskPriority().get());
+            stmt.setString(5,  task.getTaskStatus());
+    		stmt.setInt(6, id);
+    		if (stmt.executeUpdate() != 1) {
+    			throw new StorageException("unable to update status of the task");    	
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		logger.severe(e.getMessage());
+    		throw new StorageException(e.getMessage());
+    	}
+    }
     
     public ArrayList<Task> getTasks() throws StorageException {
         String query = "SELECT * FROM tasks";
