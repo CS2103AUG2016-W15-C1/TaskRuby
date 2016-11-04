@@ -195,12 +195,13 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
-    
+    @Override
     public ArrayList<Task> getTasksByName(String name) throws StorageException {
         String query = "SELECT * FROM tasks where task_name like ?";
         ArrayList<Task> taskList = new ArrayList<Task>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
+            System.out.println(name);
             pstmt.setString(1, "%" + name + "%");
             ResultSet r = pstmt.executeQuery();
             while (r.next()) {
@@ -274,5 +275,4 @@ public class DatabaseStorage implements StorageBackend {
             throw new StorageException(e.getMessage());
         }
     }
-
 }

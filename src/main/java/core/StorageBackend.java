@@ -20,4 +20,5 @@ public interface StorageBackend {
     public void deleteTask(int id) throws StorageException;
     public void deleteAllTasks() throws StorageException;
     public void deleteLastTask() throws StorageException;
+    public ArrayList<Task> getTasksByName(String name) throws StorageException;
 }
