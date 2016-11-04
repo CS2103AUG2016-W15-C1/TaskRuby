@@ -22,11 +22,9 @@ public class FindCommand extends BaseCommand {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public String getHelpString() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

@@ -62,7 +62,7 @@ public class TaskRuby extends Application {
     private Parser parser;
     private String lastCommand;
     
-    private boolean isVisible = false;
+    private boolean isVisible = true;
     
     public void toggleVisible() {
         this.isVisible = !this.isVisible;
