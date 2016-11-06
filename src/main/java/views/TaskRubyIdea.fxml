@@ -22,6 +22,10 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
+                        <TextField fx:id="commandField" layoutX="149.0" layoutY="10.0" prefHeight="44.0" prefWidth="909.0" promptText="e.g help">
+                           <font>
+                              <Font size="20.0" />
+                           </font></TextField>
                         <TableView fx:id="taskTableView" layoutX="6.0" layoutY="77.0" prefHeight="750.0" prefWidth="1341.0" AnchorPane.bottomAnchor="-29.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="77.0">
                           <columns>
                             <TableColumn fx:id="taskPriority" prefWidth="126.0" style="-fx-alignment: center; -fx-font-size: 20px;" text="Priority" />
@@ -35,10 +39,6 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TextField fx:id="commandField" layoutX="149.0" layoutY="10.0" prefHeight="44.0" prefWidth="909.0" promptText="e.g list">
-                           <font>
-                              <Font size="20.0" />
-                           </font></TextField>
                         <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:" wrappingWidth="134.697265625">
                            <font>
                               <Font size="24.0" />
