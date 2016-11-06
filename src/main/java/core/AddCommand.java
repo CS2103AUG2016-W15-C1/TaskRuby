@@ -36,8 +36,8 @@ public class AddCommand extends BaseCommand {
     private LocalDateTime getDateTime(List<DateGroup> parsedDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d H:m");
         Date d = parsedDate.get(0).getDates().get(0);
-        String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate() + 1) + " " + (d.getHours() + 1)
-                + ":" + (d.getMinutes() + 1);
+        String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + " " + (d.getHours())
+                + ":" + (d.getMinutes());
         return LocalDateTime.parse(t, formatter);
     }
 
@@ -55,7 +55,7 @@ public class AddCommand extends BaseCommand {
             LocalDateTime taskStart = null;
             String inf = null;
             String prio = null;
-            String priority = null;
+            String priority = "MED";
             for (String t : tokens) {
                 if (t.startsWith("t"))
                     taskDesc = t.substring(1);

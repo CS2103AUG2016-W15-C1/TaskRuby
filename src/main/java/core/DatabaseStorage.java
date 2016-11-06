@@ -193,7 +193,31 @@ public class DatabaseStorage implements StorageBackend {
             e.printStackTrace();
             throw new StorageException(e.getMessage());
         }
-        
+    }
+    
+    @Override
+    public ArrayList<Task> getTasksByName(String name) throws StorageException {
+        String query = "SELECT * FROM tasks where task_name like ?";
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            System.out.println(name);
+            pstmt.setString(1, "%" + name + "%");
+            ResultSet r = pstmt.executeQuery();
+            while (r.next()) {
+                taskList.add(new Task(r.getInt(COL_PRIMARY_KEY),
+                                      r.getString(COL_TASK_NAME),
+                                      r.getString(COL_CREATED_DATE),
+                                      r.getString(COL_DUE_DATE),
+                                      r.getString(COL_PRIORITY),
+                                      r.getString(COL_STATUS),
+                                      r.getString(COL_FLOATING),
+                                      r.getString(COL_DEADLINE)));
+            }
+        } catch (SQLException e) {
+            throw new StorageException(e.getMessage());
+        }
+        return taskList;
     }
 
     @Override
@@ -251,5 +275,4 @@ public class DatabaseStorage implements StorageBackend {
             throw new StorageException(e.getMessage());
         }
     }
-
 }

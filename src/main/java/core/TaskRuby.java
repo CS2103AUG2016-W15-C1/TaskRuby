@@ -41,6 +41,7 @@ public class TaskRuby extends Application {
         commandList.put("help", new HelpCommand(storage));
         commandList.put("update", new UpdateCommand(storage, this));
         commandList.put("edit", new EditCommand(storage, this));
+        commandList.put("find", new FindCommand(storage, this));
         lastCommand = "";
 
         try {
@@ -61,7 +62,7 @@ public class TaskRuby extends Application {
     private Parser parser;
     private String lastCommand;
     
-    private boolean isVisible = false;
+    private boolean isVisible = true;
     
     public void toggleVisible() {
         this.isVisible = !this.isVisible;

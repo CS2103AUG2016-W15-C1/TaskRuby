@@ -46,11 +46,20 @@ public class TaskController {
         commandField.setText("");
         logger.info("trying to parse input to textField: " + input);
         try {
+        	if (input.startsWith("find")) {
+        		System.out.println("calling find");
+        		main.getAvailableCommands().get("find").execute(input.split("\\s+"));
+        		return;
+        	}
             main.getParser().parse(input);
         } catch (ParseException | CommandException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+            return;
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
         
         try {
             this.main.getTasks().clear();
