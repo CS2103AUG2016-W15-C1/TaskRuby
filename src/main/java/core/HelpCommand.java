@@ -33,7 +33,7 @@ public class HelpCommand extends BaseCommand {
                                             "Edit task information: edit <task id> \\t <new task name> \\d <new start time> \\D <new end time> \\p <new priority> \n" +
         		                            "List all tasks: list \n" +
                                             "Clear all tasks: clear \n" +
-        		                            "Hide all tasks: hid \n" +
+        		                            "Hide all tasks: hide \n" +
         		                            "Undo previous add / delete command: undo \n" +
                                             "Find a task: find <keyword> \n" +
                                             "Show help panel: help \n" +
