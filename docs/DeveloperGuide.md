@@ -1,27 +1,16 @@
 ﻿Developer Guide
 ===============
 
--   [Introduction](#setting-up)
-
+-   [Introduction](#introduction)
 -   [Setting Up](#setting-up)
-
 -   [Design](#design)
-
 -   [Implementation](#implementation)
-
 -   [Testing](#testing)
-
 -   [Dev Ops](#dev-ops)
-
 -   [Appendix A: User Stories](#appendix-a--user-stories)
-
 -   [Appendix B: Use Cases](#appendix-b--use-cases)
-
--   [Appendix C: Non Functional
-    Requirements](#appendix-c--non-functional-requirements)
-
+-   [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 -   [Appendix D: Glossary](#appendix-d--glossary)
-
 -   [Appendix E: Product Survey](#appendix-e-product-survey)
 
 <!-- @@author A0108515L -->
@@ -37,7 +26,9 @@ This guide describes the design and implementation of TaskRuby. It will
 help you understand how TaskRuby works and how you can further
 contribute to its development.
 
-<!-- @@author -->
+<img src="images/oo-domain.png"><br>
+
+Figure 1: OO Domain Diagram
 
 SETTING UP
 ----------
@@ -46,8 +37,8 @@ SETTING UP
 
 1.  **JDK** `1.8.0_60` or later
 
-> > Any Java 8 version is not enough. The app will not work with earlier
-> > versions of Java 8.
+> Any Java 8 version is not enough. The app will not work with earlier
+> versions of Java 8.
 
 2.  **Eclipse** IDE
 
@@ -72,28 +63,22 @@ SETTING UP
 
 6.  Click `Finish`
 
--   If you are asked whether to 'keep' or 'overwrite' config files,
-    > choose to 'keep'.
+> -   If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
 
--   Depending on your connection speed and server load, it can even take
-    > up to 30 minutes for the set up to finish (This is because Gradle
-    > downloads library files from servers during the project set
-    > up process)
+> -   Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. (This is because Gradle downloads library files from servers during the project set up process.)
 
--   If Eclipse auto-changed any settings files during the import
-    > process, you can discard those changes.
+> -   If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-<!-- @@author A0118894N -->
 DESIGN
 ------
 
 ### Architecture
 
-![](media/image1.png){width="6.5in" height="3.408986220472441in"}
+<img src="images/activity diagram.png"><br>
 
-*Figure 1: Activity Diagram of TaskRuby*
+*Figure 2: Activity Diagram of TaskRuby*
 
-Figure 1 gives a high-level design overview of TaskRuby. A quick
+Figure 2 gives a high-level design overview of TaskRuby. A quick
 overview of each component follows.
 
 `Models` has only one class called Task. It is responsible for
@@ -119,20 +104,20 @@ The rest of TaskRuby consists of these four components,
 
 Each of the four components defines its API in a specified class.
 
-For example, the `Logic` component (see in Figure 2) defines its API in
+For example, the `Logic` component (see Figure 3) defines its API in
 the `TaskRuby.java` class.
 
-![](media/image2.png){width="6.499767060367454in"
-height="2.8291655730533685in"}
+<img src="images/logic-edit.png"><br>
 
-*Figure 2: Class Diagram of the* `Logic `*component*
+*Figure 3: Class Diagram of the* `Logic `*component*
+
+<!-- @@author A0118894N -->
 
 ### UI component
 
-![](media/image3.png){width="5.175262467191601in"
-height="4.014583333333333in"}
+<img src="images/UI-edit.png"><br>
 
-*Figure 3: Class Diagram of the* `UI `*component*
+*Figure 4: Class Diagram of the* `UI `*component*
 
 **API** :
 [UI.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\ui\Ui.java)
@@ -154,10 +139,11 @@ user interface accordingly.
 
 ### Logic component
 
+<img src="images/logic-edit.png"><br>
 ![](media/image2.png){width="6.499767060367454in"
 height="2.8291655730533685in"}
 
-*Figure 4: Class Diagram of the* `Logic `*component*
+*Figure 5: Class Diagram of the* `Logic `*component*
 
 **API** :
 [Logic.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\logic\Logic.java)
@@ -167,20 +153,18 @@ execution can affect the `Model` (e.g. adding a task) and/or raise
 events. The result of the command execution is encapsulated as a
 `BaseCommand` object which is passed back to the `UI`.
 
-Figure 5 below illustrates the Sequence Diagram for interactions within
+Figure 6 below illustrates the Sequence Diagram for interactions within
 the `Logic` component for the `execute("delete 1")` API call.
 
-![](media/image4.png){width="6.5in" height="2.9185476815398075in"}
+<img src="images/logic-seq-edit.png"><br>
 
-*Figure 5: Sequence Diagram of interactions within the*
-`Logic `*component*
+*Figure 6: Sequence Diagram of interactions within the* `Logic `*component*
 
 ### Model component
 
-![](media/image5.png){width="3.637431102362205in"
-height="2.529861111111111in"}s
+<img src="images/model-edit.png"><br>
 
-*Figure 6: Class Diagram of the* `Model `*component*
+*Figure 7: Class Diagram of the* `Model `*component*
 
 **API** :
 [Model.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\model\Model.java)
@@ -195,10 +179,9 @@ three components.
 
 ### Storage component
 
-![](media/image6.png){width="2.8030129046369203in"
-height="1.3868055555555556in"}
+<img src="images/storage-edit.png"><br>
 
-*Figure 7: Class Diagram of the* `Storage `*component*
+*Figure 8: Class Diagram of the* `Storage `*component*
 
 **API** :
 [Storage.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\storage\Storage.java)
@@ -209,8 +192,6 @@ read it back.
 
 <span id="common-classes" class="anchor"><span id="implementation"
 class="anchor"></span></span>
-
-<!-- @@author -->
 
 <!-- @@author A0108515L -->
 IMPLEMENTATION {#implementation-1}
@@ -235,7 +216,7 @@ We are using `java.util.logging` package for logging.
 <span id="configuration" class="anchor"><span id="testing" class="anchor"></span></span>TESTING
 -----------------------------------------------------------------------------------------------
 
-Tests can be found in the `.``/``src``/test/java` folder.
+Tests can be found in the `./src/test/java` folder.
 
 **In Eclipse**:
 
@@ -334,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`,
 Low (unlikely to have) - `*`
 
   Priority   As a ...                           I want to ...                           So that I can...
-  ---------- ---------------------------------- --------------------------------------- ---------------------------------------------------------------------------
+  ---------- ---------------------------------- --------------------------------------- ------------------------------------------------
   `* * *`    new user                           see usage instructions                  refer to instructions when I forget how to use TaskRuby
   `* * *`    user                               add a new task                          see my task in TaskRuby
   `* * *`    user                               delete a task                           remove entries that I no longer need
