@@ -115,7 +115,7 @@ public class TaskRuby extends Application {
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(TaskRuby.class.getResource("/views/RootLayout.fxml"));
+            loader.setLocation(TaskRuby.class.getClassLoader().getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
             
             Scene scene = new Scene(rootLayout);
@@ -129,7 +129,7 @@ public class TaskRuby extends Application {
     public void initTaskOverviewLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(TaskRuby.class.getResource("/views/TaskRubyIdea.fxml"));
+            loader.setLocation(TaskRuby.class.getClassLoader().getResource("TaskRubyIdea.fxml"));
             AnchorPane taskOverview = (AnchorPane) loader.load();
             rootLayout.setCenter(taskOverview);
             

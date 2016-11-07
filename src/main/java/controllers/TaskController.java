@@ -83,13 +83,19 @@ public class TaskController {
     private void initialize() {
         taskNameColumn.setCellValueFactory(cellData ->
             cellData.getValue().taskShortName());
+        
         taskIdColumn.setCellValueFactory(c -> c.getValue().taskIdentifier().asObject());
+        
         taskStartTimeColumn.setCellValueFactory(c ->
             new ReadOnlyStringWrapper(c.getValue().getTaskStartTime()));
+        
         taskStatus.setCellValueFactory(c -> c.getValue().taskStatus());
+        
         taskPriority.setCellValueFactory(c -> c.getValue().taskPriority());
+        
         taskEndDateColumn.setCellValueFactory(c -> 
         	new ReadOnlyStringWrapper(c.getValue().getTaskDeadline()));
+        
         commandField.setOnAction(event ->
 				parseInput(commandField.getText())
 			);
