@@ -152,11 +152,11 @@ public class DatabaseStorage implements StorageBackend {
      * Edits a task in the db using an UPDATE statement
      */
     //@@author A0144017R
-    public void editTask(int id, Task task) throws StorageException {
+    public void editTask(int id, Task task, boolean isFloating, boolean isDeadline) throws StorageException {
     	logger.info("trying to edit task");
-    	String query = "UPDATE tasks SET task_name = ?, created_at= ?, due_date = ?, priority = ?, status = ? where id = ?";
+    	String query = "UPDATE tasks SET task_name = ?, created_at= ?, due_date = ?, priority = ?, status = ?, floating = ?, deadline = ? where id = ?";
     	PreparedStatement stmt;
-    	System.out.println(task.isFloating());
+    	//System.out.println(task.isFloating());
     	try {
     		stmt=conn.prepareStatement(query);
     		stmt.setString(1, task.getTaskShortName());
@@ -164,7 +164,11 @@ public class DatabaseStorage implements StorageBackend {
             stmt.setString(3, task.getTaskDeadline());
             stmt.setString(4, task.taskPriority().get());
             stmt.setString(5,  task.getTaskStatus());
-    		stmt.setInt(6, id);
+            stmt.setInt(6, isFloating ? 1 : 0);
+            stmt.setInt(7, isDeadline ? 1 : 0);
+            System.out.println(task.getTaskStartTime() + "xxxx");
+            System.out.println(task.getTaskDeadline() + "yyyy");
+    		stmt.setInt(8, id);
     		if (stmt.executeUpdate() != 1) {
     			throw new StorageException("unable to edit the task");    	
     		}
