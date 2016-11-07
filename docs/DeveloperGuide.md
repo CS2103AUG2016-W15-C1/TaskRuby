@@ -14,16 +14,14 @@
 -   [Appendix E: Product Survey](#appendix-e-product-survey)
 
 <!-- @@author A0108515L -->
+
 INTRODUCTION
 ------------
 
-TaskRuby is a simple tool for busy professionals to schedule and manage
-their daily to-do tasks! It is a Java desktop application that allows
-efficient interaction with a GUI and does not require connection to the
-Internet. It is developed with a command-line interface approach.
+TaskRuby is a simple tool for busy professionals to schedule and manage their daily to-do tasks! It is a Java desktop application that allows
+efficient interaction with a GUI and does not require connection to the Internet. It is developed with a command-line interface approach.
 
-This guide describes the design and implementation of TaskRuby. It will
-help you understand how TaskRuby works and how you can further
+This guide describes the design and implementation of TaskRuby. It will help you understand how TaskRuby works and how you can further
 contribute to its development.
 
 <img src="images/oo-domain.png"><br>
@@ -37,14 +35,11 @@ SETTING UP
 
 1.  **JDK** `1.8.0_60` or later
 
-> Any Java 8 version is not enough. The app will not work with earlier
-> versions of Java 8.
+> Any Java 8 version is not enough. The app will not work with earlier versions of Java 8.
 
 2.  **Eclipse** IDE
 
-3.  **e(fx)clipse** plugin for Eclipse (Do from step 2 onwards given in
-    [this
-    page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+3.  **e(fx)clipse** plugin for Eclipse (Do from step 2 onwards given in [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 
 4.  **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 
@@ -52,8 +47,7 @@ SETTING UP
 
 1.  Fork this repo, and clone the fork to your computer
 
-2.  Open Eclipse (Note: Ensure you have installed the **e(fx)clipse**
-    and **buildship** plugins as given in the prerequisites above)
+2.  Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given in the prerequisites above)
 
 3.  Click `File` > `Import`
 
@@ -63,11 +57,13 @@ SETTING UP
 
 6.  Click `Finish`
 
-> -   If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
+> -   If you are asked whether to 'keep' or 'overwrite' configuration files, choose to 'keep'.
 
 > -   Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. (This is because Gradle downloads library files from servers during the project set up process.)
 
 > -   If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+
+<!-- @@author A0118894N -->
 
 DESIGN
 ------
@@ -78,18 +74,14 @@ DESIGN
 
 *Figure 2: Activity Diagram of TaskRuby*
 
-Figure 2 gives a high-level design overview of TaskRuby. A quick
-overview of each component follows.
+Figure 2 gives a high-level design overview of TaskRuby. A quick overview of each component follows.
 
-`Models` has only one class called Task. It is responsible for
-initializing the components in the correct sequence, and connecting them
+`Models` has only one class called Task. It is responsible for initializing the components in the correct sequence, and connecting them
 up with each other.
 
-Our event handler, `TaskController`, is a class that plays an
-integral role at the architecture level.
+Our event handler, `TaskController`, is a class that plays an integral role at the architecture level.
 
--   TaskController : This class is used by components to communicate
-    with other components using events (i.e. a form of *Event
+-   TaskController : This class is used by components to communicate with other components using events (i.e. a form of *Event
     Driven* design).
 
 The rest of TaskRuby consists of these four components,
@@ -104,14 +96,11 @@ The rest of TaskRuby consists of these four components,
 
 Each of the four components defines its API in a specified class.
 
-For example, the `Logic` component (see Figure 3) defines its API in
-the `TaskRuby.java` class.
+For example, the `Logic` component (see Figure 3) defines its API in the `TaskRuby.java` class.
 
 <img src="images/logic-edit.png"><br>
 
 *Figure 3: Class Diagram of the* `Logic `*component*
-
-<!-- @@author A0118894N -->
 
 ### UI component
 
@@ -120,7 +109,7 @@ the `TaskRuby.java` class.
 *Figure 4: Class Diagram of the* `UI `*component*
 
 **API** :
-[UI.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\ui\Ui.java)
+[UI.java]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.
 `CommandBox`, `TaskName`, `Priority`, `Status` etc. All these parts are
@@ -144,7 +133,7 @@ user interface accordingly.
 *Figure 5: Class Diagram of the* `Logic `*component*
 
 **API** :
-[Logic.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\logic\Logic.java)
+[Logic.java]
 
 `Logic` uses the `Parser` class to parse the user command. The command
 execution can affect the `Model` (e.g. adding a task) and/or raise
@@ -165,7 +154,7 @@ the `Logic` component for the `execute("delete 1")` API call.
 *Figure 7: Class Diagram of the* `Model `*component*
 
 **API** :
-[Model.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\model\Model.java)
+[Model.java]
 
 The `Model` stores a `Task` object that represents the task’s properties
 and the Task Manager data. `Model` does not depend on any of the other
@@ -182,10 +171,10 @@ three components.
 *Figure 8: Class Diagram of the* `Storage `*component*
 
 **API** :
-[Storage.java](file:///E:\Desktop%20Stuff\CS2101\src\main\java\seedu\address\storage\Storage.java)
+[Storage.java]
 
 The `Storage` component can save `UserPref` objects in json format and
-read it back. It can also save the Address Book data in xml format and
+read it back. It can also save the task data in xml format and
 read it back.
 
 <!-- @@author A0108515L -->
@@ -289,8 +278,7 @@ Here are the steps to create a new release.
 
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address
-Book depends on the [Jackson
+A project often depends on third-party libraries. For example, TaskRuby depends on the [Jackson
 library](http://wiki.fasterxml.com/JacksonHome) for XML parsing.
 Managing these *dependencies* can be automated using Gradle. For
 example, Gradle can download the dependencies automatically, which is
@@ -301,7 +289,7 @@ a. Include those libraries in the repo (this bloats the repo size)
 b. Require developers to download those libraries manually (this creates
 extra work for developers)
 
-<!-- @@author A0130164W -->
+<!-- @@author A0144017R -->
 
 APPENDIX A: USER STORIES 
 ------------------------
@@ -322,6 +310,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   `* *`     | user                              | duplicate a task that recurs weekly    | minimize number of additions for a recurring task
   `*`       | user with many tasks in TaskRuby  | sort tasks by name                     | locate a task easily
   `*`       | user                              | have a backup of my schedule           | make a recovery from the backup in case of a software or hardware crash
+
+<!-- @@author A0130164W -->
 
 APPENDIX B: USE CASES 
 ---------------------
