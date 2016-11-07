@@ -72,6 +72,7 @@ public class AddCommand extends BaseCommand {
         // System.out.println(args.length);
         try {
             String desc = "\\t" + String.join(" ", Arrays.copyOfRange(args, 0, args.length));
+            logger.info("trying to add: " + desc);
             String[] tokens = desc.split("\\\\");
             String taskDesc = "";
             LocalDateTime taskDue = null;
@@ -80,17 +81,17 @@ public class AddCommand extends BaseCommand {
             String prio = null;
             String priority = "MED";
             for (String t : tokens) {
-                if (t.startsWith("t"))
+                if (t.startsWith("t") && t.substring(1).length() > 1)
                     taskDesc = t.substring(1);
-                if (t.startsWith("d")) {
+                if (t.startsWith("d") && t.substring(1).length() > 1) {
                     List<DateGroup> groups = nattyParser.parse(t.substring(1));
                     taskStart = getDateTime(groups);
                 }
-                if (t.startsWith("D"))
+                if (t.startsWith("D") && t.substring(1).length() > 1)
                     taskDue = getDateTime(nattyParser.parse(t.substring(1)));
-                if (t.startsWith("i"))
+                if (t.startsWith("i") && t.substring(1).length() > 1)
                     inf = t.substring(1);
-                if (t.startsWith("p")) {
+                if (t.startsWith("p") && t.substring(1).length() > 1) {
                     prio = t.substring(1).trim();
                     int prioInt = Integer.parseInt(prio);
                     switch (prioInt) {

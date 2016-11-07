@@ -100,6 +100,7 @@ public class TaskRuby extends Application {
     }
     
     public void setLastCommand(String input) {
+    	logger.info("last commadn: " + input);
     	lastCommand = input;
     }
 
