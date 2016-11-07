@@ -1,5 +1,5 @@
 package core;
-
+//@@author A0108515L
 import java.util.logging.Logger;
 /*
  * This command quits the task manager from the CLI
