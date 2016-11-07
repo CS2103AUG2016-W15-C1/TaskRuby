@@ -1,7 +1,10 @@
 package core;
 
 import java.util.logging.Logger;
-
+/*
+ * This command quits the task manager from the CLI
+ * The user does not have to use the mouse - conveinience function
+ */
 public class ExitCommand extends BaseCommand {
 
     private static final Logger logger = Logger.getLogger(ExitCommand.class.getName());
@@ -23,7 +26,10 @@ public class ExitCommand extends BaseCommand {
             throw new CommandException("exit do not take in args");
         }
        
-        logger.info("Shutting down on request");
+        logger.severe("Shutting down on request");
+        /*
+         * @TODO I think this can be handled in a better way
+         */
         System.exit(0);
 
     }

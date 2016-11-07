@@ -1,4 +1,8 @@
 package core;
+/*
+ * This command lists all available tasks in the task manager
+ * it is the inverse of the hide command
+ */
 //@@author A0108515L
 public class ListCommand extends BaseCommand {
 

@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import models.Task;
 
+/*
+ * This interface describes what TaskRuby expects as a storage layer
+ * Regardless of storage medium (text file, json, db), if the storage layer
+ * implements this interface it is plug an play to the task manager.
+ * There is also a companion `StorageException`
+ */
 public interface StorageBackend {
     
     public void setFileName(String fileName);
