@@ -51,7 +51,8 @@ public class AddCommand extends BaseCommand {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d H:m");
         Date d = parsedDate.get(0).getDates().get(0);
         @SuppressWarnings("deprecation")
-		String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + " " + (d.getHours())
+		String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" 
+                   + (d.getDate()) + " " + (d.getHours())
                 + ":" + (d.getMinutes());
         return LocalDateTime.parse(t, formatter);
     }
