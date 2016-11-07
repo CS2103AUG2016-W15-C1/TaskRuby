@@ -93,5 +93,13 @@ public class TaskController {
     public void setMain(TaskRuby main) {
         this.main = main;
         taskTableView.setItems(main.getTasks());
+    	try {
+            this.main.getTasks().clear();
+            if (this.main.getTaskListVisibility()) 
+            	this.main.getTasks().addAll(this.main.getStorage().getTasks());
+        } catch (StorageException e) {
+            e.printStackTrace();
+            logger.severe(e.getMessage());
+        }
     }
 }
