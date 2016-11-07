@@ -69,7 +69,8 @@ public class UndoCommandTest {
             deleteCommand.execute(cmd2);
             assertEquals("that the size is 0 after delete command", storage.getTasks().size(), 0);
             undoCommand.execute(new String[] {});
-            assertEquals("that the task should have the same name after undo command", storage.getTasks().get(0).getTaskShortName(), "task1");
+            assertEquals("that the task should have the same name after undo command", 
+            		storage.getTasks().get(0).getTaskShortName(), "task1");
         } catch (CommandException e) {
             assertNotEquals("exception string is not empty", "",
                             e.getMessage());

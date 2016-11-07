@@ -1,8 +1,6 @@
 package models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javafx.beans.property.IntegerProperty;
@@ -25,6 +23,9 @@ public class Task {
     public Task(String taskName) {
         this.taskShortName = new SimpleStringProperty(taskName);
         this.taskIdentifier = new SimpleIntegerProperty(0);
+        this.isDeadline = this.isFloating = true;
+        this.taskStartTime = new SimpleObjectProperty<LocalDateTime>(LocalDateTime.now());
+        this.taskPriority = new SimpleStringProperty("LOW");
     }
     
     public Task(int taskId, String taskName, String startTime, String dueDate,
