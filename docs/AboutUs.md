@@ -13,26 +13,26 @@ Role: Project Mentor
 #### [Charlene Lee Kei Xin](https://github.com/chaejinkeyne)
 <img src="images/CharleneLee.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: UI, Documentation
 
 -----
 
 #### [Jasper Lee](https://github.com/jasperlee27)
 <img src="images/JasperLee.jpg" width="150"><br>
 Role: Developer <br>  
-Responsibilities: Logic
+Responsibilities: Logic, Deadlines
 
 -----
 
 #### [Song Kai](https://github.com/elijahsk)
 <img src="images/SongKai.JPG" width="150"><br>
 Role: Developer <br>  
-Responsibilities: Model
+Responsibilities: Model, Issues Tracking
 
 -----
 
 #### [Alex](https://github.com/spaghetti-)
 <img src="images/alex.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Code
+Responsibilities: Code quality, Integration
 
