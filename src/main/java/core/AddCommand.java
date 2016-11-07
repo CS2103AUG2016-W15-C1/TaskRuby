@@ -41,7 +41,6 @@ public class AddCommand extends BaseCommand {
         return helpString;
     }
     
-    //@@author A0118894N
 
     //@@author A0118894N
     /*
