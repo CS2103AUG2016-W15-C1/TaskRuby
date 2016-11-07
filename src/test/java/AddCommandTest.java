@@ -1,3 +1,4 @@
+//@@author A0130164W
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
@@ -33,6 +34,7 @@ public class AddCommandTest {
                         addCommand.getHelpString());
     }
     
+    //@@author A0108515L
     @Test
     public void emptyArgument() throws SQLException {
         String[] stubArgs = {};

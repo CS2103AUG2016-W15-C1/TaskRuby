@@ -24,6 +24,7 @@ public class UpdateCommand extends BaseCommand {
         return helpString;
     }
 
+    
     @Override
     public void execute(String[] args) throws CommandException, SQLException {
         if (args.length < 2) {

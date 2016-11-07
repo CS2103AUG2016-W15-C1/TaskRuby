@@ -40,6 +40,8 @@ public class AddCommand extends BaseCommand {
     public String getHelpString() {
         return helpString;
     }
+    
+    //@@author A0118894N
 
     //@@author A0118894N
     /*
@@ -58,6 +60,7 @@ public class AddCommand extends BaseCommand {
         return LocalDateTime.parse(t, formatter);
     }
 
+    //@@author A0130164W
     /*
      * Obtain the list of arguments passed in from the UI
      * and then split them according to our command keyword
@@ -114,10 +117,9 @@ public class AddCommand extends BaseCommand {
             Task t = new Task(taskDesc, taskStart, taskDue, inf, priority);
             storage.addTask(t);
             main.setLastCommand("add " + desc);
-            // throw StorageException("stub");
         } catch (StorageException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            logger.severe(e.getMessage());
             throw new CommandException(e.getMessage());
         }
     }

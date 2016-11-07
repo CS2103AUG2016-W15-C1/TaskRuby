@@ -20,6 +20,7 @@ public class ExitCommand extends BaseCommand {
         return helpString;
     }
 
+    //@@author A0130164W
     @Override
     public void execute(String[] args) throws CommandException {
         if (args.length > 0) {

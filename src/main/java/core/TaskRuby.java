@@ -1,3 +1,4 @@
+//@@author A0108515L
 package core;
 
 import java.io.IOException;
@@ -104,6 +105,7 @@ public class TaskRuby extends Application {
     	lastCommand = input;
     }
 
+    //@@author A0118894N
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;

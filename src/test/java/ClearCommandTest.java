@@ -51,6 +51,7 @@ public class ClearCommandTest {
     
     
 
+    //@@author A0144017R
     @Test
     public void clearCommandTest() throws SQLException {
         String[] stubArgs = {};

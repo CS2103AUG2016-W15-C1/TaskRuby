@@ -3,7 +3,7 @@ package core;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-// @@author A0144017R
+//@@author A0144017R
 
 public class HelpCommand extends BaseCommand {
 

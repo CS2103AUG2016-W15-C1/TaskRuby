@@ -1,3 +1,4 @@
+//@@author A0130164W
 package core;
 
 import java.sql.SQLException;
@@ -19,13 +20,11 @@ public class FindCommand extends BaseCommand {
 			main.getTasks().clear();
 			main.getTasks().addAll(storage.getTasksByName(args[1]));
 		} catch (StorageException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	@Override
 	public String getHelpString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

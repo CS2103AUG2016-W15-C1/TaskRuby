@@ -1,6 +1,6 @@
+//@@author A0130164W
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
 import java.util.UUID;
 
 import org.junit.After;
@@ -97,10 +97,12 @@ public class DatabaseStorageTest {
         }
     }
     
+    //@@author A0118894N
     @Test
     public void deleteTaskTest() {
         try {
             storage.addTask(new Task("some random task"));
+
             assertEquals("size is 1", storage.getTasks().size(), 1);
             storage.deleteTask(1);
             assertEquals("size is 0", storage.getTasks().size(), 0);
@@ -109,7 +111,7 @@ public class DatabaseStorageTest {
         }
     }
     
-    
+    //@@author A0144017R
     @Test
     public void deleteAllTest() {
         try {

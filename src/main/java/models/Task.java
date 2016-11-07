@@ -1,3 +1,4 @@
+//@@author A0118894N
 package models;
 
 import java.time.LocalDateTime;
@@ -52,6 +53,8 @@ public class Task {
         this.taskPriority = new SimpleStringProperty(priority);
         this.taskStatus = new SimpleStringProperty(status);
     }
+    
+    //@@author A0130164W
     
     public Task(String taskName, LocalDateTime startDate, 
     		LocalDateTime taskDue, String information, String priority) {
@@ -120,6 +123,7 @@ public class Task {
     		return taskPriority.get().toString();
     }
     
+    //@@author A0144017R
     public String getTaskPriority() {
         
         

@@ -1,3 +1,4 @@
+//@@author A0118894N
 package core;
 //@@author A0118894N
 import java.io.File;
@@ -98,6 +99,7 @@ public class DatabaseStorage implements StorageBackend {
         file.delete();
     }
     
+    //@@author A0108515L
     /*
      * Adds a task to the storage layer
      * from an instance of the Task model
@@ -200,6 +202,7 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
     
+    //@@author A0118894N
     /*
      * Get tasks by id from the db as an instance of Task model
      */
@@ -316,6 +319,8 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    
+    //@@author A0130164W
     /*
      * Deletes the last added task from the db
      */
