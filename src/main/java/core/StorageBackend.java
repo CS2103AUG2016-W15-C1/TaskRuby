@@ -19,7 +19,7 @@ public interface StorageBackend {
     
     public void addTask(Task task) throws StorageException, SQLException;
     public void updateTaskStatus(int id, String status) throws StorageException, SQLException;
-    public void editTask(int id, Task task) throws StorageException;
+    public void editTask(int id, Task task, boolean isFloating, boolean isDeadline) throws StorageException;
     public ArrayList<Task> getTasks() throws StorageException;
     public Task getTaskById(int id) throws StorageException;
     public int getNextAvailableIdentifier() throws StorageException;

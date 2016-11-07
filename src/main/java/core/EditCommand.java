@@ -18,7 +18,7 @@ public class EditCommand extends BaseCommand {
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
-    private static final String helpString = "edit <task>";
+    private static final String helpString = "edit <task id> \\t <new task name> \\d <new task start time> \\D <new task end time> \\p <new priority>";
     com.joestelmach.natty.Parser nattyParser = new com.joestelmach.natty.Parser();
 
     public EditCommand(StorageBackend storage, TaskRuby main) {
@@ -29,12 +29,22 @@ public class EditCommand extends BaseCommand {
     public String getHelpString() {
         return helpString;
     }
+    
+    
+    /*
+     * Parses the date and time from a natural string
+     * to a LocalDateTime instance using natty
+     * @TODO: fix bug with indexing
+     * @param parsedDate a list of obtained dategroups from natty
+     */
 
     private LocalDateTime getDateTime(List<DateGroup> parsedDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d H:m");
         Date d = parsedDate.get(0).getDates().get(0);
-        String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate() + 1) + " " + (d.getHours() + 1)
-                + ":" + (d.getMinutes() + 1);
+        @SuppressWarnings("deprecation")
+		String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" 
+                   + (d.getDate()) + " " + (d.getHours())
+                + ":" + (d.getMinutes());
         return LocalDateTime.parse(t, formatter);
     }
 
@@ -55,15 +65,21 @@ public class EditCommand extends BaseCommand {
             String inf = null;
             String priority = taskToBeEdited.getTaskPriorityString();
             String prio = null;
+            boolean isFloating = taskToBeEdited.isFloating();
+            boolean isDeadline = taskToBeEdited.isDeadline();
+            
             for (String t : tokens) {
                 if (t.startsWith("t"))
                     taskDesc = t.substring(1);
                 if (t.startsWith("d")) {
                     List<DateGroup> groups = nattyParser.parse(t.substring(1));
                     taskStart = getDateTime(groups);
+                    isFloating = false;
                 }
-                if (t.startsWith("D"))
+                if (t.startsWith("D")) {
                     taskDue = getDateTime(nattyParser.parse(t.substring(1)));
+                    isDeadline = false;
+                }
                 if (t.startsWith("p")) {
                     prio = t.substring(1).trim();
                     int prioInt = Integer.parseInt(prio);
@@ -83,7 +99,7 @@ public class EditCommand extends BaseCommand {
             }
             logger.info("trying to edit task");
             Task t = new Task(taskDesc, taskStart, taskDue, inf, priority);
-            storage.editTask(taskId, t);
+            storage.editTask(taskId, t, isFloating, isDeadline);
             // throw StorageException("stub");
         } catch (StorageException e) {
             // TODO Auto-generated catch block
