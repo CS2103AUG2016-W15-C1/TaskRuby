@@ -71,7 +71,7 @@ public class DatabaseStorageTest {
         try {
             assertEquals("that the amount of tasks is 0", 0,
                          storage.getTasks().size());
-            storage.addTask(new Task("fuck"));
+            storage.addTask(new Task("some random task"));
             assertEquals("amount of tasks increased by 1", 1,
                          storage.getTasks().size());
         } catch (StorageException e) {
@@ -100,7 +100,7 @@ public class DatabaseStorageTest {
     @Test
     public void deleteTaskTest() {
         try {
-            storage.addTask(new Task("fuck"));
+            storage.addTask(new Task("some random task"));
             assertEquals("size is 1", storage.getTasks().size(), 1);
             storage.deleteTask(1);
             assertEquals("size is 0", storage.getTasks().size(), 0);

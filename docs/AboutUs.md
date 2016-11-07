@@ -29,10 +29,10 @@ Responsibilities: Logic
 Role: Developer <br>  
 Responsibilities: Model
 
+-----
 
-# Contributors
+#### [Alex](https://github.com/spaghetti-)
+<img src="images/alex.jpg" width="150"><br>
+Role: Developer <br>
+Responsibilities: Code
 
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
