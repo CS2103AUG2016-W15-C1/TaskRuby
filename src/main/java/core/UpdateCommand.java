@@ -5,21 +5,18 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import models.Task;
-import core.AddCommand;
-
+/*
+ * This command helps us update a task status
+ */
 public class UpdateCommand extends BaseCommand {
     
     private static final Logger logger = Logger.getLogger(UpdateCommand.class.getName());
-    private TaskRuby main;
     private static final String helpString = "update task_id status";
     private static final String[] possibleDoneStatus = {"done", "complete", "completed", "finish", "finished", "over"};
     private static final String[] possibleNotDoneStatus = {"not done", "incomplete", "not completed", "progress", "working"};
 
     public UpdateCommand(StorageBackend storage, TaskRuby main) {
         super(storage);
-        this.main = main;
-        // TODO Auto-generated constructor stub
     }
 
     @Override

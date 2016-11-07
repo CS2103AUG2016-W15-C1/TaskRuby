@@ -19,13 +19,10 @@ public class EditCommand extends BaseCommand {
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     private static final String helpString = "edit <task>";
-    private TaskRuby main;
     com.joestelmach.natty.Parser nattyParser = new com.joestelmach.natty.Parser();
 
     public EditCommand(StorageBackend storage, TaskRuby main) {
         super(storage);
-        this.main = main;
-        // TODO Auto-generated constructor stub
     }
 
     @Override

@@ -17,13 +17,16 @@ public class ClearCommand extends BaseCommand {
         return helpString;
     }
 
+    /*
+     * Clears the taskList on `clear`
+     * 
+     */
     @Override
     public void execute(String[] args) throws CommandException {
         if (args.length > 0) {
             throw new CommandException("clear do not take in args");
         }
         try {
-            int index = storage.getNextAvailableIdentifier();
             logger.info("clearing all tasks in list");
             storage.deleteAllTasks();
         } catch (StorageException e) {

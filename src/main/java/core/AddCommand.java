@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.swing.text.DateFormatter;
-
 import models.Task;
 //@@author A0130164W
 public class AddCommand extends BaseCommand {
@@ -20,27 +18,51 @@ public class AddCommand extends BaseCommand {
 
     private static final String helpString = "add <task>";
     private TaskRuby main;
+    /*
+     * we call it by its fully qualified name to avoid
+     * ambiguity with our own Parser class
+     */
     com.joestelmach.natty.Parser nattyParser = new com.joestelmach.natty.Parser();
 
+    /*
+     * Constructor for the addCommand class
+     */
     public AddCommand(StorageBackend storage, TaskRuby main) {
         super(storage);
         this.main = main;
-        // TODO Auto-generated constructor stub
     }
 
+    /*
+     * (non-Javadoc)
+     * @see core.BaseCommand#getHelpString()
+     */
     @Override
     public String getHelpString() {
         return helpString;
     }
 
+    /*
+     * Parses the date and time from a natural string
+     * to a LocalDateTime instance using natty
+     * @TODO: fix bug with indexing
+     * @param parsedDate a list of obtained dategroups from natty
+     */
     private LocalDateTime getDateTime(List<DateGroup> parsedDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d H:m");
         Date d = parsedDate.get(0).getDates().get(0);
-        String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + " " + (d.getHours())
+        @SuppressWarnings("deprecation")
+		String t = (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + " " + (d.getHours())
                 + ":" + (d.getMinutes());
         return LocalDateTime.parse(t, formatter);
     }
 
+    /*
+     * Obtain the list of arguments passed in from the UI
+     * and then split them according to our command keyword
+     * Parse tokens corresponding to different fields and
+     * then finally add the full task to storage
+     * 
+     */
     @Override
     public void execute(String[] args) throws CommandException, SQLException {
         if (args.length == 0) {

@@ -1,7 +1,6 @@
 package core;
 
 import java.io.File;
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,17 +8,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import models.Task;
 /*
- * This class allows tasks to be stored to a sqlite3 db
+ * This class allows tasks to be stored to a sqlite3 db file
+ * In addition to maintaining data integrity this allows
+ * the user to backup their storage layer to the cloud
+ * or send it over email (just an example).
  */
 public class DatabaseStorage implements StorageBackend {
     
     private static final Logger logger = Logger.getLogger(DatabaseStorage.class.getName());
     
+    /*
+     * @todo change
+     */
     private String fileName = "test.db";
     private Connection conn = null;
     
@@ -32,7 +36,10 @@ public class DatabaseStorage implements StorageBackend {
     private static final int COL_FLOATING = 7;
     private static final int COL_DEADLINE = 8;
 
-    
+    /*
+     * Constructor that takes in an arbitrary name for the filename
+     * It opens the connection as well
+     */
     public DatabaseStorage(String file) {
         if (file == "") file = this.fileName;
         setFileName(file);
@@ -45,6 +52,10 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    /*
+     * Helper function that runs a query and returns a resultSet
+     * 
+     */
     private ResultSet runQuery(String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
@@ -56,6 +67,12 @@ public class DatabaseStorage implements StorageBackend {
         this.fileName = fileName;
     }
 
+    /*
+     * Initialize the storage layer with our predefined
+     * database schema
+     * It is important that the schema is static across
+     * the same version
+     */
     @Override
     public void initializeStorage() throws StorageException {
         String query = "CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -70,6 +87,9 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
 
+    /*
+     * Deletes the database file.
+     */
     @Override
     public void deleteStorage() throws SQLException {
         File file = new File(fileName);
@@ -78,6 +98,10 @@ public class DatabaseStorage implements StorageBackend {
         file.delete();
     }
     
+    /*
+     * Adds a task to the storage layer
+     * from an instance of the Task model
+     */
     public void addTask(Task task) throws StorageException {
         logger.info("trying to add task to database");
         String query = "INSERT INTO tasks(task_name, created_at, due_date, priority, floating, deadline) VALUES(?, ?, ?, ?, ?, ?)";
@@ -101,7 +125,9 @@ public class DatabaseStorage implements StorageBackend {
         }
         
     }
-    
+    /*
+     * Updates the task status in the db
+     */
     //@@author A0144017R
     public void updateTaskStatus(int id, String status) throws StorageException {
     	logger.info("trying to update task status");
@@ -122,6 +148,9 @@ public class DatabaseStorage implements StorageBackend {
     	}
     }
     
+    /*
+     * Edits a task in the db using an UPDATE statement
+     */
     //@@author A0144017R
     public void editTask(int id, Task task) throws StorageException {
     	logger.info("trying to edit task");
@@ -146,6 +175,9 @@ public class DatabaseStorage implements StorageBackend {
     	}
     }
     
+    /*
+     * Get all tasks from the db as an ArrayList<Task>
+     */
     public ArrayList<Task> getTasks() throws StorageException {
         String query = "SELECT * FROM tasks";
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -167,6 +199,9 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
     
+    /*
+     * Get tasks by id from the db as an instance of Task model
+     */
     @Override
     public Task getTaskById(int id) throws StorageException {
         String query = "SELECT * from tasks where id = ?";
@@ -195,6 +230,10 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    /*
+     * Get all tasks that match a particular name from the database
+     * this function uses an SQL SELECT LIKE statement on the task_name
+     */
     @Override
     public ArrayList<Task> getTasksByName(String name) throws StorageException {
         String query = "SELECT * FROM tasks where task_name like ?";
@@ -220,6 +259,12 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
 
+    /*
+     * Since we have unique identifiers for our tasks, 
+     * we have to get the primary key from the database to set it.
+     * This function returns the next available primary key from the SQL
+     * generated list.
+     */
     @Override
     public int getNextAvailableIdentifier() throws StorageException {
         String query = "SELECT seq FROM sqlite_sequence WHERE name='tasks'";
@@ -235,6 +280,9 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    /*
+     * Deletes tasks by id from the db
+     */
     @Override
     public void deleteTask(int id) throws StorageException {
         String query = "DELETE FROM tasks WHERE id = ?";
@@ -249,6 +297,9 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    /*
+     * Deletes all tasks from the db
+     */
     @Override
     public void deleteAllTasks() throws StorageException {
         String query = "DELETE FROM tasks";
@@ -264,6 +315,9 @@ public class DatabaseStorage implements StorageBackend {
         }
     }
     
+    /*
+     * Deletes the last added task from the db
+     */
     @Override
     public void deleteLastTask() throws StorageException {
         String query = "SELECT * FROM tasks ORDER BY id DESC";

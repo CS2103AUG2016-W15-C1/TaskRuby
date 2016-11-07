@@ -8,12 +8,10 @@ import core.StorageException;
 import core.TaskRuby;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 import models.Task;
 
 public class TaskController {
@@ -42,6 +40,13 @@ public class TaskController {
     @FXML
     private TableColumn<Task, String> taskEndDateColumn;
     
+    
+    /*
+     * Takes input from the user and then passes it down to the
+     * command parsers
+     * @param input the string from the UI
+     * 
+     */
     private void parseInput(String input) {
         commandField.setText("");
         logger.info("trying to parse input to textField: " + input);
@@ -56,7 +61,6 @@ public class TaskController {
             e.printStackTrace();
             return;
         } catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
@@ -71,6 +75,10 @@ public class TaskController {
         }
     }
     
+    /*
+     * FXML function that initializes the task list
+     * when the app starts
+     */
     @FXML
     private void initialize() {
         taskNameColumn.setCellValueFactory(cellData ->
@@ -88,8 +96,17 @@ public class TaskController {
     }
     
 
+    /*
+     * Constructor
+     */
     public TaskController() {}
     
+    /*
+     * Function that sets the reference to the main class
+     * inside the controller
+     * 
+     * @params main the reference to the main class
+     */
     public void setMain(TaskRuby main) {
         this.main = main;
         taskTableView.setItems(main.getTasks());

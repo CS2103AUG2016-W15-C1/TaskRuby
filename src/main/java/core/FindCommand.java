@@ -2,8 +2,9 @@ package core;
 
 import java.sql.SQLException;
 
-import models.Task;
-
+/*
+ * This command finds tasks following input from the user.
+ */
 public class FindCommand extends BaseCommand {
 	private TaskRuby main;
 	public FindCommand(StorageBackend storage, TaskRuby main) {

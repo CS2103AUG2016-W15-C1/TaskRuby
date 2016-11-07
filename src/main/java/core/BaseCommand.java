@@ -2,6 +2,11 @@ package core;
 
 import java.sql.SQLException;
 
+/*
+ * This class implements a generic command that others
+ * can inherit off.
+ * It defines some functions that every command must have
+ */
 public abstract class BaseCommand {
     protected StorageBackend storage;
     

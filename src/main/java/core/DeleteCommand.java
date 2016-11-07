@@ -4,6 +4,10 @@ import java.util.logging.Logger;
 
 import models.Task;
 
+/*
+ * This command lets an user delete a task from the taskmanager
+ * as well as from the storage layer
+ */
 public class DeleteCommand extends BaseCommand {
 
     private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
@@ -18,6 +22,7 @@ public class DeleteCommand extends BaseCommand {
     @Override
     public void execute(String[] args) throws CommandException {
         if (args.length == 0) {
+        	logger.warning("Not enough arguments to DeleteCommand");
             throw new CommandException("not enough arguments");
         }
         try {

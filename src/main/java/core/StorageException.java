@@ -1,5 +1,10 @@
 package core;
 
+/*
+ * Errors raised during interacting with the storage layer must be
+ * morphed and bubbled up in this exception
+ * 
+ */
 public class StorageException extends Exception {
     /**
      * 
