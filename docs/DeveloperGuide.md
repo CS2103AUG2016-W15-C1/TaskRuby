@@ -7,10 +7,10 @@
 -   [Implementation](#implementation)
 -   [Testing](#testing)
 -   [Dev Ops](#dev-ops)
--   [Appendix A: User Stories](#appendix-a--user-stories)
--   [Appendix B: Use Cases](#appendix-b--use-cases)
--   [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
--   [Appendix D: Glossary](#appendix-d--glossary)
+-   [Appendix A: User Stories](#appendix-a-user-stories)
+-   [Appendix B: Use Cases](#appendix-b-use-cases)
+-   [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+-   [Appendix D: Glossary](#appendix-d-glossary)
 -   [Appendix E: Product Survey](#appendix-e-product-survey)
 
 <!-- @@author A0108515L -->
@@ -140,8 +140,6 @@ user interface accordingly.
 ### Logic component
 
 <img src="images/logic-edit.png"><br>
-![](media/image2.png){width="6.499767060367454in"
-height="2.8291655730533685in"}
 
 *Figure 5: Class Diagram of the* `Logic `*component*
 
@@ -190,11 +188,9 @@ The `Storage` component can save `UserPref` objects in json format and
 read it back. It can also save the Address Book data in xml format and
 read it back.
 
-<span id="common-classes" class="anchor"><span id="implementation"
-class="anchor"></span></span>
-
 <!-- @@author A0108515L -->
-IMPLEMENTATION {#implementation-1}
+
+IMPLEMENTATION
 --------------
 
 ### Logging
@@ -213,7 +209,7 @@ We are using `java.util.logging` package for logging.
 -   `FINE` : Details that is not usually noteworthy but may be useful in
     debugging e.g. print the actual list instead of just its size
 
-<span id="configuration" class="anchor"><span id="testing" class="anchor"></span></span>TESTING
+TESTING
 -----------------------------------------------------------------------------------------------
 
 Tests can be found in the `./src/test/java` folder.
@@ -300,38 +296,34 @@ Managing these *dependencies* can be automated using Gradle. For
 example, Gradle can download the dependencies automatically, which is
 better than these alternatives.
 
-a\. Include those libraries in the repo (this bloats the repo size)
+a. Include those libraries in the repo (this bloats the repo size)
 
-b\. Require developers to download those libraries manually (this creates
-extra work for developers)<span id="appendix-a-user-stories"
-class="anchor"></span>
+b. Require developers to download those libraries manually (this creates
+extra work for developers)
 
 <!-- @@author A0130164W -->
 
-APPENDIX A: USER STORIES {#appendix-a-user-stories-1}
+APPENDIX A: USER STORIES 
 ------------------------
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`,
-Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-  Priority   As a ...                           I want to ...                           So that I can...
-  ---------- ---------------------------------- --------------------------------------- ------------------------------------------------
-  `* * *`    new user                           see usage instructions                  refer to instructions when I forget how to use TaskRuby
-  `* * *`    user                               add a new task                          see my task in TaskRuby
-  `* * *`    user                               delete a task                           remove entries that I no longer need
-  `* * *`    user                               undo latest command                     update task list quickly if there is a change-of-mind
-  `* * *`    user                               edit a task                             update task entry with fresh information without deleting and then adding
-  `* * *`    user                               find a task by name                     locate details of task without having to go through the entire list
-  `* * *`    user                               add task without deadlines              track tasks that has no deadline and just need to be done “someday”
-  `* * *`    user                               mark tasks that are already completed   keep track of what I have done
-  `* *`      user                               hide list of tasks by default           minimize chance of someone else seeing them by accident
-  `* *`      user                               duplicate a task that recurs weekly     minimize number of additions for a recurring task
-  `*`        user with many tasks in TaskRuby   sort tasks by name                      locate a task easily
-  `*`        user                               have a backup of my schedule            make a recovery from the backup in case of a software or hardware crash
+  Priority  | As a ...                          | I want to ...                          | So that I can...
+  ----------| ----------------------------------| ---------------------------------------| ---------------------------------------------
+  `* * *`   | new user                          | see usage instructions                 | refer to instructions when I forget how to use TaskRuby
+  `* * *`   | user                              | add a new task                         | see my task in TaskRuby
+  `* * *`   | user                              | delete a task                          | remove entries that I no longer need
+  `* * *`   | user                              | undo latest command                    | update task list quickly if there is a change-of-mind
+  `* * *`   | user                              | edit a task                            | update task entry with fresh information without deleting and then adding
+  `* * *`   | user                              | find a task by name                    | locate details of task without having to go through the entire list
+  `* * *`   | user                              | add task without deadlines             | track tasks that has no deadline and just need to be done “someday”
+  `* * *`   | user                              | mark tasks that are already completed  | keep track of what I have done
+  `* *`     | user                              | hide list of tasks by default          | minimize chance of someone else seeing them by accident
+  `* *`     | user                              | duplicate a task that recurs weekly    | minimize number of additions for a recurring task
+  `*`       | user with many tasks in TaskRuby  | sort tasks by name                     | locate a task easily
+  `*`       | user                              | have a backup of my schedule           | make a recovery from the backup in case of a software or hardware crash
 
-<span id="appendix-b-use-cases" class="anchor"></span>
-
-APPENDIX B: USE CASES {#appendix-b-use-cases-1}
+APPENDIX B: USE CASES 
 ---------------------
 
 (For all use cases in this section, the **System** is TaskRuby and the
@@ -344,7 +336,7 @@ APPENDIX B: USE CASES {#appendix-b-use-cases-1}
 1.  User requests to add task
 
 2.  TaskRuby adds the task.
-    Use case ends.
+    > Use case ends.
 
 **Extensions**
 
@@ -361,7 +353,7 @@ APPENDIX B: USE CASES {#appendix-b-use-cases-1}
 1.  User requests to list tasks matching keywords
 
 2.  TaskRuby shows a list of tasks matching keywords.
-    Use case ends.
+    > Use case ends.
 
 **Extensions**
 
@@ -382,17 +374,18 @@ APPENDIX B: USE CASES {#appendix-b-use-cases-1}
 3.  User requests to delete a specific task in the list
 
 4.  TaskRuby deletes the task.
-    Use case ends.
+    > Use case ends.
 
 **Extensions**
 
 2a. The list is empty
-Use case ends
+    > Use case ends
 
 3a. The given index is invalid
 
-> > 3a1. TaskRuby shows an error message.
-> > 3a2. Use case resumes at step 2.
+> 3a1. TaskRuby shows an error message.
+>
+> 3a2. Use case resumes at step 2.
 
 #### Use case: Undo latest command
 
@@ -403,7 +396,7 @@ Use case ends
 2.  User requests to undo latest command.
 
 3.  TaskRuby undoes the latest command.
-    Use case ends.
+    > Use case ends.
 
 **Extensions**
 
@@ -411,16 +404,16 @@ Use case ends
 
 > 2a1. TaskRuby delete last added task.
 >
-> Use case ends.
+>> Use case ends.
 
 2b. Latest command is delete task
 
 > 2b1. TaskRuby adds last deleted task.
 >
-> Use case ends.
+>> Use case ends.
 
 2c. Latest command is invalid
-Use case ends
+    > Use case ends
 
 <!-- @@author A0144017R -->
 
@@ -449,59 +442,47 @@ APPENDIX D: GLOSSARY
 
 ##### Mainstream OS
 
-> Windows, Linux, Unix, OS-X<span id="private-contact-detail"
-> class="anchor"><span id="appendix-e-product-survey"
-> class="anchor"></span></span>
+> Windows, Linux, Unix, OS-X
 
-Appendix E: PRODUCT SURVEY {#appendix-e-product-survey-1}
+APPENDIX E: PRODUCT SURVEY
 --------------------------
 
 Google Calendar
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------
-  **Pros**                                                                    **Cons**
-  --------------------------------------------------------------------------- -----------------------------------------------------------------
-  1. UI is simple, default is weekly view                                     1. Internet is required to sync
-                                                                              
-  2. Good overview of all timeslots available or unavailable is shown         2. No one-shot CLI approach is available (even with quick add)
-                                                                              
-  3. Collaboration feature is available; calendar is sharable with friends    3. Events must be allocated timeslots in the calendar
-  ---------------------------------------------------------------------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------------------------
+  **Pros**                                                                   | **Cons**
+  -------------------------------------------------------------------------- | ---------------------------------------------------------
+  1. UI is simple, default is weekly view                                    | 1. Internet is required to sync
+  2. Good overview of all timeslots available or unavailable is shown        | 2. No one-shot CLI approach is available (even with quick add)
+  3. Collaboration feature is available; calendar is sharable with friends   | 3. Events must be allocated timeslots in the calendar
+  --------------------------------------------------------------------------------------------------------------------------------------
 
 Evernote
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------
-  **Pros**                                                                   **Cons**
-  -------------------------------------------------------------------------- -----------------------------------------------------------------------
-  1. Creation and update of notes are allowed over various platforms         1. Heavily dependent on Internet as user is cut off from database if
-                                                                             there is no connection
-  2. Variety of notes are allowed to be created and classified (e.g.        
-  business cards, introduction manuals etc.)                                 2. Ability to organise and categorise notes is limited, only 1-level
-                                                                             notebooks and stacks are allowed unlike a file system
-  3. Incorporation of app onto different platforms is allowed for ease of   
-  search and notifying user (e.g. Google search)                             
-  --------------------------------------------------------------------------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------------------------
+  **Pros**                                                                  | **Cons**
+  --------------------------------------------------------------------------| ----------------------------------------------------------
+  1. Creation and update of notes are allowed over various platforms        | 1. Heavily dependent on Internet as user is cut off from database if there is no connection
+  2. Variety of notes are allowed to be created and classified (e.g. business cards, introduction manuals etc.) | 2. Ability to organise and categorise notes is limited, only 1-level notebooks and stacks are allowed unlike a file system
+  3. Incorporation of app onto different platforms is allowed for ease of search and notifying user (e.g. Google search) |
+  --------------------------------------------------------------------------------------------------------------------------------------
 
 Todo.txt
 
   --------------------------------------------------------------------------------------------------------------------
-  **Pros**                                                        **Cons**
-  --------------------------------------------------------------- ----------------------------------------------------
-  1. Simple interface (e.g. CLI) is available                     1. Events are not automatically sorted by date
-                                                                  
-  2. Internet connection is not required                          2. Clashes of events are not prompted to the user
-                                                                  
-  3. Support is available for large amount of task and details   
+  **Pros**                                                       | **Cons**
+  ---------------------------------------------------------------| ----------------------------------------------------
+  1. Simple interface (e.g. CLI) is available                    | 1. Events are not automatically sorted by date 
+  2. Internet connection is not required                         | 2. Clashes of events are not prompted to the user
+  3. Support is available for large amount of task and details   |
   --------------------------------------------------------------------------------------------------------------------
 
 Fantastical
 
   --------------------------------------------------------------------------------------------
-  **Pros**                                            **Cons**
-  --------------------------------------------------- ----------------------------------------
-  1. Both CLI and NLP are available                   1. It is a paid service
-                                                      
-  2. Internet connection is not required              2. Events have to be time-constrained
-                                                      
-  3. Keyboard shortcuts can be used for navigation   
+  **Pros**                                           | **Cons**
+  ---------------------------------------------------| ----------------------------------------
+  1. Both CLI and NLP are available                  | 1. It is a paid service
+  2. Internet connection is not required             | 2. Events have to be time-constrained
+  3. Keyboard shortcuts can be used for navigation   |
   --------------------------------------------------------------------------------------------
