@@ -2,7 +2,7 @@ package core;
 /*
  * This command hides the task list from prying eyes
  */
-//@author A0130164W
+//@@author A0108515L
 public class HideCommand extends BaseCommand {
 
     private TaskRuby main;

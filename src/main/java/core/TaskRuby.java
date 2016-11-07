@@ -128,6 +128,7 @@ public class TaskRuby extends Application {
         }
     }
     
+    
     public void initTaskOverviewLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();

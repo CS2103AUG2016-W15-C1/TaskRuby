@@ -1,6 +1,5 @@
 //@@author A0118894N
 package core;
-//@@author A0118894N
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -158,7 +157,6 @@ public class DatabaseStorage implements StorageBackend {
     	logger.info("trying to edit task");
     	String query = "UPDATE tasks SET task_name = ?, created_at= ?, due_date = ?, priority = ?, status = ? where id = ?";
     	PreparedStatement stmt;
-    	System.out.println(task.isFloating());
     	try {
     		stmt=conn.prepareStatement(query);
     		stmt.setString(1, task.getTaskShortName());
@@ -244,7 +242,6 @@ public class DatabaseStorage implements StorageBackend {
         ArrayList<Task> taskList = new ArrayList<Task>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
-            System.out.println(name);
             pstmt.setString(1, "%" + name + "%");
             ResultSet r = pstmt.executeQuery();
             while (r.next()) {
@@ -263,6 +260,7 @@ public class DatabaseStorage implements StorageBackend {
         return taskList;
     }
 
+    
     /*
      * Since we have unique identifiers for our tasks, 
      * we have to get the primary key from the database to set it.
