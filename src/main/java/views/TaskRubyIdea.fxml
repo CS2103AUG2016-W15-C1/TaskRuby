@@ -1,6 +1,4 @@
-//@@author A0108515L
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -23,7 +21,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="taskTableView" layoutX="-1.0" layoutY="61.0" prefHeight="737.0" prefWidth="1198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="61.0">
+                        <TableView fx:id="taskTableView" layoutX="6.0" layoutY="77.0" prefHeight="750.0" prefWidth="1341.0" AnchorPane.bottomAnchor="-29.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="77.0">
                           <columns>
                             <TableColumn fx:id="taskPriority" prefWidth="126.0" style="-fx-alignment: center; -fx-font-size: 20px;" text="Priority" />
                             <TableColumn fx:id="taskIdColumn" prefWidth="272.0" style="-fx-font-size: 20px;" text="Task ID" />
