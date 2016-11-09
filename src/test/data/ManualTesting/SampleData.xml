@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <tasks>
 	<task>
 		<desc>sample task 1</desc>
@@ -10,14 +11,14 @@
 		<desc>sample task 2</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 3</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>done</status>
 	</task>
 	<task>
@@ -52,7 +53,7 @@
 		<desc>sample task 8</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>not done</status>
 	</task>
 	<task>
@@ -73,21 +74,21 @@
 		<desc>sample task 11</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>not done</status>
 	</task>
 	<task>
 		<desc>sample task 12</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 13</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
@@ -351,7 +352,7 @@
 		<desc>sample task 11</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>not done</status>
 	</task>
 	<task>
@@ -365,14 +366,14 @@
 		<desc>sample task 13</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 14</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>3</priority>
 		<status>done</status>
 	</task>
 	<task>
@@ -393,27 +394,27 @@
 		<desc>sample task 17</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 18</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 19</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 		<status>done</status>
 	</task>
 	<task>
 		<desc>sample task 20</desc>
 		<start_date>tomorrow</start_date>
 		<end_date>next week</end_date>
-		<priority>1</priority>
+		<priority>2</priority>
 	</task>
 </tasks>
